@@ -18,21 +18,21 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
     return (
       <section
         aria-label="Navigation System Status"
-        className="w-full bg-[#0e141d] border-3 border-[#243242] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left"
+        className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left transition-colors"
       >
         <div className="flex items-center gap-5">
-          <div className="w-16 h-16 rounded-2xl bg-[#182230] border-2 border-[#3b506b] flex items-center justify-center flex-shrink-0 text-cyan-400">
-            <PauseCircle className="w-10 h-10" aria-hidden="true" />
+          <div className="w-18 h-18 rounded-2xl bg-[var(--bg-card-raised)] border-3 border-[var(--border-subtle)] flex items-center justify-center flex-shrink-0 text-[var(--color-focus)]">
+            <PauseCircle className="w-12 h-12" aria-hidden="true" />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-widest font-bold text-gray-400">
-              CURRENT STATUS
+            <p className="text-xs uppercase tracking-widest font-black text-[var(--text-muted)]">
+              CURRENT SYSTEM STATUS
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white">
+            <h2 className="text-3xl md:text-5xl font-black text-[var(--text-primary)]">
               STANDBY
             </h2>
-            <p className="text-lg text-gray-300 mt-1">
-              Press <strong className="text-cyan-400">[Start Assistance]</strong> or hit <kbd className="bg-gray-800 px-2 py-0.5 rounded border border-gray-600 font-mono text-sm">Space</kbd> to begin.
+            <p className="text-lg md:text-xl text-[var(--text-secondary)] font-semibold mt-1">
+              Press <strong className="text-[var(--color-focus)] underline">[START ASSISTANCE]</strong> or hit <kbd className="bg-[var(--bg-card-raised)] px-2 py-0.5 rounded border border-[var(--border-subtle)] font-mono text-sm">Space</kbd> to begin.
             </p>
           </div>
         </div>
@@ -47,20 +47,20 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
         role="alert"
         aria-live="assertive"
         aria-label="Critical System Alert"
-        className="w-full bg-red-950/90 border-4 border-red-500 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left shadow-lg shadow-red-950/50"
+        className="w-full bg-red-950 border-4 border-red-500 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left shadow-2xl"
       >
-        <div className="w-16 h-16 rounded-2xl bg-red-900 border-2 border-red-400 flex items-center justify-center flex-shrink-0 text-white">
-          <WifiOff className="w-10 h-10" aria-hidden="true" />
+        <div className="w-18 h-18 rounded-2xl bg-red-900 border-3 border-white flex items-center justify-center flex-shrink-0 text-white">
+          <WifiOff className="w-12 h-12" aria-hidden="true" />
         </div>
         <div>
-          <p className="text-sm uppercase tracking-widest font-black text-red-300">
+          <p className="text-xs uppercase tracking-widest font-black text-red-300">
             SYSTEM ALERT
           </p>
-          <h2 className="text-3xl md:text-4xl font-black text-white">
+          <h2 className="text-3xl md:text-5xl font-black text-white">
             BACKEND SERVER OFFLINE
           </h2>
-          <p className="text-lg md:text-xl text-red-100 font-semibold mt-1">
-            Cannot reach ML Server on configured URL. Run: <code className="bg-black/60 px-2 py-1 rounded text-red-200 font-mono">python server.py</code>
+          <p className="text-lg md:text-xl text-red-100 font-bold mt-1">
+            Cannot reach ML Server. Start local backend with: <code className="bg-black px-2.5 py-1 rounded text-yellow-300 font-mono text-base border border-yellow-400">python server.py</code>
           </p>
         </div>
       </section>
@@ -74,10 +74,10 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
         role="alert"
         aria-live="assertive"
         aria-label="Critical Obstacle Stop Alert"
-        className="w-full bg-[#3a0808] border-4 border-red-500 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left animate-pulse"
+        className="w-full bg-[#3d0000] border-4 border-red-500 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left animate-pulse"
       >
-        <div className="w-20 h-20 rounded-2xl bg-red-600 border-2 border-white flex items-center justify-center flex-shrink-0 text-white shadow-xl">
-          <OctagonAlert className="w-12 h-12 stroke-[2.5]" aria-hidden="true" />
+        <div className="w-20 h-20 rounded-2xl bg-red-600 border-3 border-white flex items-center justify-center flex-shrink-0 text-white shadow-2xl">
+          <OctagonAlert className="w-14 h-14 stroke-[3]" aria-hidden="true" />
         </div>
         <div className="flex-1">
           <div className="inline-block bg-red-600 text-white px-3 py-1 rounded-md text-xs font-black tracking-widest uppercase mb-1">
@@ -86,7 +86,7 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
             {activeAlert.title}
           </h2>
-          <p className="text-xl md:text-2xl text-red-100 font-bold mt-2">
+          <p className="text-xl md:text-2xl text-red-100 font-black mt-2">
             {activeAlert.detail}
           </p>
         </div>
@@ -100,19 +100,19 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
         role="alert"
         aria-live="polite"
         aria-label="Obstacle Warning"
-        className="w-full bg-[#331800] border-4 border-amber-400 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left"
+        className="w-full bg-[#332200] border-4 border-yellow-400 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left"
       >
-        <div className="w-18 h-18 rounded-2xl bg-amber-500 border-2 border-white flex items-center justify-center flex-shrink-0 text-black shadow-lg">
-          <AlertTriangle className="w-11 h-11 stroke-[2.5]" aria-hidden="true" />
+        <div className="w-20 h-20 rounded-2xl bg-yellow-400 border-3 border-black flex items-center justify-center flex-shrink-0 text-black shadow-xl">
+          <AlertTriangle className="w-14 h-14 stroke-[3]" aria-hidden="true" />
         </div>
         <div className="flex-1">
-          <div className="inline-block bg-amber-400 text-black px-3 py-1 rounded-md text-xs font-black tracking-widest uppercase mb-1">
+          <div className="inline-block bg-yellow-400 text-black px-3 py-1 rounded-md text-xs font-black tracking-widest uppercase mb-1">
             OBSTACLE CAUTION
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-amber-200 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-black text-yellow-300 tracking-tight">
             {activeAlert.title}
           </h2>
-          <p className="text-lg md:text-xl text-white font-semibold mt-1">
+          <p className="text-xl md:text-2xl text-white font-black mt-1">
             {activeAlert.detail}
           </p>
         </div>
@@ -126,19 +126,19 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
       role="status"
       aria-live="polite"
       aria-label="Path Clear Status"
-      className="w-full bg-[#022413] border-4 border-emerald-500 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left"
+      className="w-full bg-[#002b11] border-4 border-[#00e676] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left"
     >
-      <div className="w-18 h-18 rounded-2xl bg-emerald-500 border-2 border-white flex items-center justify-center flex-shrink-0 text-black shadow-lg">
-        <ShieldCheck className="w-11 h-11 stroke-[2.5]" aria-hidden="true" />
+      <div className="w-20 h-20 rounded-2xl bg-[#00e676] border-3 border-white flex items-center justify-center flex-shrink-0 text-black shadow-xl">
+        <ShieldCheck className="w-14 h-14 stroke-[3]" aria-hidden="true" />
       </div>
       <div className="flex-1">
-        <div className="inline-block bg-emerald-500 text-black px-3 py-1 rounded-md text-xs font-black tracking-widest uppercase mb-1">
+        <div className="inline-block bg-[#00e676] text-black px-3 py-1 rounded-md text-xs font-black tracking-widest uppercase mb-1">
           SYSTEM STATUS: ALL CLEAR
         </div>
-        <h2 className="text-3xl md:text-5xl font-black text-emerald-300 tracking-tight">
+        <h2 className="text-3xl md:text-5xl font-black text-[#00ff66] tracking-tight">
           PATH CLEAR
         </h2>
-        <p className="text-lg md:text-xl text-emerald-100 font-semibold mt-1">
+        <p className="text-xl md:text-2xl text-emerald-100 font-bold mt-1">
           No immediate obstacles detected in walking corridor. Safe to proceed.
         </p>
       </div>

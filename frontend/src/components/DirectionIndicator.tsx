@@ -24,54 +24,69 @@ export const DirectionIndicator: React.FC<DirectionIndicatorProps> = ({
     {
       dir: 'left',
       label: 'LEFT',
-      icon: <ArrowLeft className="w-10 h-10 md:w-14 md:h-14 stroke-[3]" aria-hidden="true" />,
-      subtitle: activeDirection === 'left' && isAlert && activeAlert.primaryObstacle ? activeAlert.primaryObstacle.displayName : 'CLEAR',
+      icon: <ArrowLeft className="w-12 h-12 md:w-16 md:h-16 stroke-[3.5]" aria-hidden="true" />,
+      subtitle:
+        activeDirection === 'left' && isAlert && activeAlert.primaryObstacle
+          ? activeAlert.primaryObstacle.displayName
+          : 'CLEAR',
     },
     {
       dir: 'center',
       label: 'CENTER',
-      icon: <ArrowUp className="w-10 h-10 md:w-14 md:h-14 stroke-[3]" aria-hidden="true" />,
-      subtitle: activeDirection === 'center' && isAlert && activeAlert.primaryObstacle ? activeAlert.primaryObstacle.displayName : 'CLEAR',
+      icon: <ArrowUp className="w-12 h-12 md:w-16 md:h-16 stroke-[3.5]" aria-hidden="true" />,
+      subtitle:
+        activeDirection === 'center' && isAlert && activeAlert.primaryObstacle
+          ? activeAlert.primaryObstacle.displayName
+          : 'CLEAR',
     },
     {
       dir: 'right',
       label: 'RIGHT',
-      icon: <ArrowRight className="w-10 h-10 md:w-14 md:h-14 stroke-[3]" aria-hidden="true" />,
-      subtitle: activeDirection === 'right' && isAlert && activeAlert.primaryObstacle ? activeAlert.primaryObstacle.displayName : 'CLEAR',
+      icon: <ArrowRight className="w-12 h-12 md:w-16 md:h-16 stroke-[3.5]" aria-hidden="true" />,
+      subtitle:
+        activeDirection === 'right' && isAlert && activeAlert.primaryObstacle
+          ? activeAlert.primaryObstacle.displayName
+          : 'CLEAR',
     },
   ];
 
   return (
     <section
-      aria-label="Directional Obstacle Radar"
-      className="w-full bg-[#0e141d] border-2 border-[#243242] rounded-2xl p-4 md:p-6"
+      aria-label="Spatial Direction Radar"
+      className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-3xl p-5 md:p-7 shadow-xl transition-colors"
     >
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-extrabold uppercase tracking-widest text-cyan-400">
+      <div className="flex items-center justify-between mb-4 border-b-2 border-[var(--border-subtle)] pb-3">
+        <h3 className="text-base md:text-lg font-black uppercase tracking-widest text-[var(--color-focus)]">
           SPATIAL DIRECTION RADAR
         </h3>
-        <span className="text-xs text-gray-400 font-bold uppercase">
-          {isRunning ? (isAlert ? 'OBSTACLE DETECTED' : 'ALL CLEAR') : 'STANDBY'}
+        <span className="text-xs md:text-sm font-black uppercase px-3 py-1 rounded-lg bg-[var(--bg-card-raised)] border border-[var(--border-subtle)] text-[var(--text-primary)]">
+          {isRunning ? (isAlert ? '⚠ OBSTACLE DETECTED' : '✓ PATH CLEAR') : 'STANDBY'}
         </span>
       </div>
 
       <div className="grid grid-cols-3 gap-3 md:gap-6">
         {directions.map((d) => {
           const isActive = activeDirection === d.dir;
-          let cardStyle = 'bg-[#141b24] border-2 border-[#283747] text-gray-400';
-          let badgeStyle = 'bg-gray-800 text-gray-400 border border-gray-700';
+          let cardStyle =
+            'bg-[var(--bg-card-raised)] border-3 border-[var(--border-subtle)] text-[var(--text-muted)] opacity-70';
+          let badgeStyle =
+            'bg-black/60 text-[var(--text-muted)] border border-[var(--border-subtle)]';
 
           if (!isRunning) {
-            cardStyle = 'bg-[#141b24] border-2 border-[#283747] text-gray-500 opacity-60';
+            cardStyle =
+              'bg-[var(--bg-card-raised)] border-3 border-[var(--border-subtle)] text-[var(--text-muted)] opacity-50';
           } else if (isActive && isCritical) {
-            cardStyle = 'bg-red-950 border-4 border-red-500 text-white shadow-2xl shadow-red-900/60 scale-[1.03] animate-pulse';
+            cardStyle =
+              'bg-[#3d0000] border-4 border-red-500 text-white shadow-2xl scale-[1.03] animate-pulse';
             badgeStyle = 'bg-red-600 text-white font-black border-2 border-white';
           } else if (isActive && isAlert) {
-            cardStyle = 'bg-amber-950/80 border-4 border-amber-400 text-amber-200 shadow-xl shadow-amber-950/50 scale-[1.02]';
-            badgeStyle = 'bg-amber-400 text-black font-black';
+            cardStyle =
+              'bg-[#332200] border-4 border-yellow-400 text-yellow-200 shadow-2xl scale-[1.02]';
+            badgeStyle = 'bg-yellow-400 text-black font-black border-2 border-black';
           } else if (!isAlert) {
-            cardStyle = 'bg-[#021f10] border-2 border-emerald-600/60 text-emerald-300';
-            badgeStyle = 'bg-emerald-800/80 text-emerald-200 border border-emerald-600';
+            cardStyle =
+              'bg-[#002b11] border-3 border-[#00e676] text-[#00ff66]';
+            badgeStyle = 'bg-[#005522] text-[#00ff66] border border-[#00ff66]';
           }
 
           return (
@@ -79,27 +94,27 @@ export const DirectionIndicator: React.FC<DirectionIndicatorProps> = ({
               key={d.dir}
               role="region"
               aria-label={`${d.label} direction status: ${d.subtitle}`}
-              className={`flex flex-col items-center justify-center p-4 md:p-6 rounded-2xl transition-all duration-200 ${cardStyle}`}
+              className={`flex flex-col items-center justify-center p-4 md:p-7 rounded-2xl transition-all duration-200 ${cardStyle}`}
             >
               {/* Direction Icon */}
-              <div className="mb-2">
+              <div className="mb-3">
                 {!isAlert && isRunning ? (
-                  <CheckCircle2 className="w-8 h-8 md:w-12 md:h-12 text-emerald-400" aria-hidden="true" />
+                  <CheckCircle2 className="w-12 h-12 md:w-16 md:h-16 text-[#00ff66]" aria-hidden="true" />
                 ) : (
                   d.icon
                 )}
               </div>
 
               {/* Direction Name */}
-              <span className="text-xl md:text-3xl font-black tracking-wide uppercase">
+              <span className="text-2xl md:text-4xl font-black tracking-wider uppercase">
                 {d.label}
               </span>
 
-              {/* Status/Obstacle Tag */}
+              {/* Obstacle Status Tag */}
               <span
-                className={`mt-2 px-2.5 py-1 rounded-lg text-xs md:text-sm font-extrabold uppercase tracking-wider text-center max-w-full truncate ${badgeStyle}`}
+                className={`mt-3 px-3 py-1.5 rounded-xl text-xs md:text-base font-black uppercase tracking-wider text-center max-w-full truncate ${badgeStyle}`}
               >
-                {isRunning ? d.subtitle : 'OFFLINE'}
+                {isRunning ? d.subtitle : 'STANDBY'}
               </span>
             </div>
           );

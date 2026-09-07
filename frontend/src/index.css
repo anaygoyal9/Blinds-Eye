@@ -5,16 +5,17 @@
   --font-mono: 'JetBrains Mono', monospace;
   --font-display: 'Space Grotesk', 'Atkinson Hyperlegible', sans-serif;
 
-  /* Assistive High-Contrast Palette */
+  /* Standard High-Contrast Palette (WCAG AAA Dark) */
   --bg-main: #06090e;
-  --bg-card: #0e141d;
-  --bg-card-raised: #182230;
-  --border-subtle: #243242;
-  --border-strong: #3b506b;
+  --bg-card: #0e1520;
+  --bg-card-hover: #162030;
+  --bg-card-raised: #1c2a3d;
+  --border-subtle: #2d4259;
+  --border-strong: #456588;
   
   --text-primary: #ffffff;
-  --text-secondary: #c2cbd6;
-  --text-muted: #8b99a8;
+  --text-secondary: #d0dbe7;
+  --text-muted: #94a7bc;
 
   --color-clear: #00e676;       /* Accessible High Contrast Green */
   --color-clear-bg: #032b17;
@@ -28,28 +29,30 @@
   --color-warning-bg: #332a00;
   --color-warning-border: #ffea00;
 
-  --color-focus: #00e5ff;       /* Crisp Cyan Focus Indicator */
-  --color-accent: #2979ff;
+  --color-focus: #00ffff;       /* Crisp Neon Cyan Focus Indicator */
+  --color-accent: #00e5ff;
 }
 
-/* Ultra High Contrast Mode (WCAG AAA+ Black & Yellow) */
+/* Scientifically Calibrated Low-Vision Ultra High Contrast Theme (Pure Yellow & True Black) */
+/* Designed for retinitis pigmentosa, macular degeneration, cataracts, and diabetic retinopathy */
 .theme-ultra-contrast {
   --bg-main: #000000;
-  --bg-card: #0a0a0a;
-  --bg-card-raised: #141414;
-  --border-subtle: #ffd600;
-  --border-strong: #ffff00;
+  --bg-card: #050505;
+  --bg-card-hover: #141414;
+  --bg-card-raised: #1c1c1c;
+  --border-subtle: #ffff00;
+  --border-strong: #ffd600;
   
-  --text-primary: #ffff00;
-  --text-secondary: #ffffff;
-  --text-muted: #e6e6e6;
+  --text-primary: #ffff00;      /* Pure luminance yellow - highest macular sensitivity */
+  --text-secondary: #ffffff;    /* Pure white */
+  --text-muted: #fff5b8;        /* Soft yellow-white */
 
   --color-clear: #00ff66;
-  --color-clear-bg: #002200;
+  --color-clear-bg: #002b00;
   --color-clear-border: #00ff66;
 
-  --color-alert: #ff0033;
-  --color-alert-bg: #330000;
+  --color-alert: #ff1a1a;
+  --color-alert-bg: #3d0000;
   --color-alert-border: #ff3333;
 
   --color-warning: #ffff00;
@@ -57,34 +60,69 @@
   --color-warning-border: #ffff00;
 
   --color-focus: #00ffff;
-  --color-accent: #ffd600;
+  --color-accent: #ffff00;
 }
 
-/* Text Size Scaling */
+/* Government-style Font Scaling (A-, A, A+) */
 .text-size-normal {
   --scale-factor: 1;
+  font-size: 16px;
 }
 
 .text-size-large {
-  --scale-factor: 1.2;
-  font-size: 115%;
+  --scale-factor: 1.25;
+  font-size: 19px;
 }
 
 .text-size-extra-large {
-  --scale-factor: 1.4;
-  font-size: 130%;
+  --scale-factor: 1.5;
+  font-size: 22px;
 }
 
 html, body {
   font-family: var(--font-primary);
-  background-color: var(--bg-main);
-  color: var(--text-primary);
-  line-height: 1.5;
+  background-color: var(--bg-main) !important;
+  color: var(--text-primary) !important;
+  line-height: 1.6;
   margin: 0;
   padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-/* Accessible, impossible-to-miss focus outlines */
+/* Theme Surface Classes */
+.theme-bg-main {
+  background-color: var(--bg-main) !important;
+}
+
+.theme-bg-card {
+  background-color: var(--bg-card) !important;
+}
+
+.theme-bg-card-raised {
+  background-color: var(--bg-card-raised) !important;
+}
+
+.theme-border {
+  border-color: var(--border-subtle) !important;
+}
+
+.theme-border-strong {
+  border-color: var(--border-strong) !important;
+}
+
+.theme-text-primary {
+  color: var(--text-primary) !important;
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.theme-text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* Accessible, impossible-to-miss 4px focus outlines */
 *:focus-visible {
   outline: 4px solid var(--color-focus) !important;
   outline-offset: 3px !important;

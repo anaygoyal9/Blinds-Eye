@@ -14,26 +14,26 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
   const getPriorityBadge = (priority: Obstacle['priority']) => {
     switch (priority) {
       case 'critical':
-        return 'bg-red-600 text-white border-red-400';
+        return 'bg-red-600 text-white border-2 border-white';
       case 'high':
-        return 'bg-amber-500 text-black border-amber-300';
+        return 'bg-yellow-400 text-black border-2 border-black font-black';
       case 'medium':
-        return 'bg-sky-700 text-white border-sky-400';
+        return 'bg-cyan-900 text-cyan-200 border border-cyan-400';
       case 'low':
-        return 'bg-gray-700 text-gray-200 border-gray-500';
+        return 'bg-gray-800 text-gray-200 border border-gray-500';
     }
   };
 
   const getProximityBadge = (level: Obstacle['proximityLevel']) => {
     switch (level) {
       case 'immediate':
-        return 'text-red-400 bg-red-950/80 border-red-500';
+        return 'text-white bg-red-700 border-2 border-white font-black';
       case 'near':
-        return 'text-amber-300 bg-amber-950/80 border-amber-400';
+        return 'text-black bg-yellow-400 border-2 border-black font-black';
       case 'approaching':
-        return 'text-sky-300 bg-sky-950/80 border-sky-400';
+        return 'text-cyan-200 bg-cyan-950 border border-cyan-400';
       case 'far':
-        return 'text-gray-300 bg-gray-900 border-gray-600';
+        return 'text-gray-300 bg-gray-900 border border-gray-600';
     }
   };
 
@@ -52,25 +52,25 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
 
   return (
     <section
-      aria-label="Detected Obstacles Priority List"
-      className="w-full bg-[#0e141d] border-2 border-[#243242] rounded-2xl p-5 md:p-6"
+      aria-label="Prioritized Detected Obstacles"
+      className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-3xl p-5 md:p-7 shadow-xl transition-colors"
     >
-      <div className="flex items-center justify-between mb-4 border-b border-[#243242] pb-3">
-        <div className="flex items-center gap-2">
-          <Layers className="w-5 h-5 text-cyan-400" aria-hidden="true" />
-          <h3 className="font-extrabold text-base md:text-lg text-white">
+      <div className="flex items-center justify-between mb-4 border-b-2 border-[var(--border-subtle)] pb-3">
+        <div className="flex items-center gap-2.5">
+          <Layers className="w-6 h-6 text-[var(--color-focus)]" aria-hidden="true" />
+          <h3 className="font-black text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wider">
             PRIORITIZED OBSTACLES ({isRunning ? obstacles.length : 0})
           </h3>
         </div>
-        <span className="text-xs text-gray-400 font-semibold uppercase">
-          Sorted by Danger Priority
+        <span className="text-xs md:text-sm text-[var(--text-muted)] font-black uppercase">
+          Sorted by Hazard Level
         </span>
       </div>
 
       {!isRunning || obstacles.length === 0 ? (
-        <div className="py-8 text-center text-gray-400 bg-[#090d13] rounded-xl border border-[#1e2a38]">
-          <p className="text-base font-semibold">
-            {isRunning ? 'No obstacles currently in path' : 'Navigation inactive'}
+        <div className="py-8 text-center text-[var(--text-muted)] bg-[var(--bg-card-raised)] rounded-2xl border-2 border-[var(--border-subtle)]">
+          <p className="text-base md:text-lg font-bold">
+            {isRunning ? '✓ Walking corridor is clear. No obstacles detected.' : 'Navigation is paused.'}
           </p>
         </div>
       ) : (
@@ -78,43 +78,43 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
           {obstacles.map((obs, index) => (
             <li
               key={obs.id || index}
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3.5 md:p-4 bg-[#141d27] border-2 border-[#243242] rounded-xl gap-3"
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 md:p-5 bg-[var(--bg-card-raised)] border-3 border-[var(--border-subtle)] rounded-2xl gap-4 transition-colors"
             >
               {/* Obstacle info */}
-              <div className="flex items-center gap-3">
-                <span className="w-7 h-7 rounded-full bg-[#202c3a] border border-[#3b506b] flex items-center justify-center font-mono font-bold text-xs text-cyan-300">
+              <div className="flex items-center gap-3.5">
+                <span className="w-8 h-8 rounded-full bg-black border-2 border-[var(--border-strong)] flex items-center justify-center font-mono font-black text-sm text-[var(--color-focus)]">
                   {index + 1}
                 </span>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg md:text-xl font-bold text-white capitalize">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-xl md:text-2xl font-black text-[var(--text-primary)] capitalize">
                       {obs.displayName}
                     </span>
                     <span
-                      className={`text-[11px] font-black uppercase px-2 py-0.5 rounded border ${getPriorityBadge(
+                      className={`text-xs font-black uppercase px-2.5 py-0.5 rounded-md ${getPriorityBadge(
                         obs.priority
                       )}`}
                     >
                       {obs.priority}
                     </span>
                   </div>
-                  <span className="text-xs text-gray-400 font-mono">
+                  <span className="text-xs text-[var(--text-muted)] font-mono font-bold">
                     Confidence: {(obs.confidence * 100).toFixed(0)}%
                   </span>
                 </div>
               </div>
 
               {/* Direction & Proximity Badges */}
-              <div className="flex items-center gap-2.5 w-full sm:w-auto justify-between sm:justify-end">
-                <span className="font-extrabold text-sm md:text-base text-cyan-300 bg-[#1b2837] px-3 py-1.5 rounded-lg border border-[#30455e]">
+              <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                <span className="font-black text-base md:text-lg text-[var(--text-primary)] bg-black px-4 py-2 rounded-xl border-2 border-[var(--border-strong)]">
                   {getDirectionText(obs.direction)}
                 </span>
                 <span
-                  className={`text-xs md:text-sm font-bold uppercase px-3 py-1.5 rounded-lg border flex items-center gap-1.5 ${getProximityBadge(
+                  className={`text-xs md:text-sm font-black uppercase px-3.5 py-2 rounded-xl border flex items-center gap-1.5 ${getProximityBadge(
                     obs.proximityLevel
                   )}`}
                 >
-                  <AlertTriangle className="w-3.5 h-3.5" aria-hidden="true" />
+                  <AlertTriangle className="w-4 h-4" aria-hidden="true" />
                   {obs.proximityLevel} ({obs.proximity})
                 </span>
               </div>
