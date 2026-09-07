@@ -62,7 +62,7 @@ export default function App() {
           : 'Navigation is currently in standby.'}
       </div>
 
-      {/* Header with Government-Style Accessibility Toolbar (A-, A, A+ & High Contrast) */}
+      {/* Header - Compact Single Row with Right-Aligned A11y Toolbar */}
       <Header
         backendStatus={backendStatus}
         appMode={appMode}
@@ -71,40 +71,44 @@ export default function App() {
         onUpdateSettings={updateSettings}
       />
 
-      {/* Main Content Area - Optimized for Low-Vision & Blind Users */}
-      <main id="main-content" className="flex-1 max-w-5xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
-        {/* 1. System Status Banner (At the very top) */}
-        <StatusBanner
-          activeAlert={activeAlert}
-          isRunning={isRunning}
-          backendStatus={backendStatus}
-        />
+      {/* Main Content Area - Immediate Low-Vision Primary Interface */}
+      <main id="main-content" className="flex-1 max-w-5xl w-full mx-auto p-3 md:p-5 flex flex-col gap-4">
+        {/* Compact Top Status & Control Row */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+          <div className="md:col-span-4">
+            <StatusBanner
+              activeAlert={activeAlert}
+              isRunning={isRunning}
+              backendStatus={backendStatus}
+            />
+          </div>
+          <div className="md:col-span-8">
+            <Controls
+              isRunning={isRunning}
+              appMode={appMode}
+              settings={settings}
+              onToggleRunning={toggleNavigation}
+              onSetAppMode={setAppMode}
+              onUpdateSettings={updateSettings}
+            />
+          </div>
+        </div>
 
-        {/* 2. Spatial Direction Radar (Immediately beneath status) */}
+        {/* 1. PRIMARY MAIN INTERFACE: SPATIAL DIRECTION RADAR */}
         <DirectionIndicator activeAlert={activeAlert} isRunning={isRunning} />
 
-        {/* 3. Prioritized Obstacles List */}
+        {/* 2. IMMEDIATE SECONDARY INTERFACE: PRIORITIZED OBSTACLES LIST */}
         <ObstaclesList
           obstacles={activeAlert.allObstacles}
           isRunning={isRunning}
         />
 
-        {/* 4. Primary Navigation Controls (Large Start/Stop, Operating Modes, Quick Toggles) */}
-        <Controls
-          isRunning={isRunning}
-          appMode={appMode}
-          settings={settings}
-          onToggleRunning={toggleNavigation}
-          onSetAppMode={setAppMode}
-          onUpdateSettings={updateSettings}
-        />
-
-        {/* 5. Interactive Diagnostic Test Matrix (when in Test Mode) */}
+        {/* 3. DIAGNOSTIC MATRIX (When in Test Mode) */}
         {appMode === 'test' && (
           <TestModePanel onTriggerTest={triggerManualTest} />
         )}
 
-        {/* 6. Live RGB + Depth Camera Stream for Sighted Companion */}
+        {/* 4. SIGHTED COMPANION LIVE STREAM (Toggleable) */}
         <VideoFeed
           videoUrl={videoFeedUrl}
           backendStatus={backendStatus}
@@ -113,30 +117,30 @@ export default function App() {
           onToggleShowFeed={(show) => updateSettings({ showVideoFeed: show })}
         />
 
-        {/* 7. Spoken Announcement History Log */}
+        {/* 5. RECENT SPOKEN ANNOUNCEMENTS LOG */}
         <LogsPanel logs={logs} />
 
-        {/* 8. Safety Disclaimer */}
+        {/* 6. SAFETY DISCLAIMER */}
         <SafetyDisclaimer />
       </main>
 
-      {/* Accessible Footer */}
-      <footer className="w-full border-t-2 border-[var(--border-subtle)] bg-[var(--bg-card)] py-6 px-4 text-center text-xs md:text-sm text-[var(--text-secondary)] transition-colors">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      {/* Compact Accessible Footer */}
+      <footer className="w-full border-t border-[var(--border-subtle)] bg-[var(--bg-card)] py-4 px-4 text-center text-xs text-[var(--text-secondary)] transition-colors">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="font-bold">
-            <strong className="text-[var(--text-primary)] font-black">Blind's Eye v1.0.0</strong> — Assistive Spatial Navigation System
+            <strong className="text-[var(--text-primary)] font-black">Blind's Eye v1.0</strong> — Assistive Spatial Navigation Prototype
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-2.5 font-mono text-xs text-[var(--text-primary)]">
-            <span className="bg-[var(--bg-card-raised)] px-2 py-1 rounded border border-[var(--border-subtle)]"><kbd>Space</kbd> Start/Stop</span>
-            <span className="bg-[var(--bg-card-raised)] px-2 py-1 rounded border border-[var(--border-subtle)]"><kbd>S</kbd> Settings</span>
-            <span className="bg-[var(--bg-card-raised)] px-2 py-1 rounded border border-[var(--border-subtle)]"><kbd>M</kbd> Mode</span>
-            <span className="bg-[var(--bg-card-raised)] px-2 py-1 rounded border border-[var(--border-subtle)]"><kbd>V</kbd> Voice</span>
-            <span className="bg-[var(--bg-card-raised)] px-2 py-1 rounded border border-[var(--border-subtle)]"><kbd>H</kbd> Haptics</span>
+          <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-[11px] text-[var(--text-primary)]">
+            <span className="bg-[var(--bg-card-raised)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)]"><kbd>Space</kbd> Start/Stop</span>
+            <span className="bg-[var(--bg-card-raised)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)]"><kbd>S</kbd> Settings</span>
+            <span className="bg-[var(--bg-card-raised)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)]"><kbd>M</kbd> Mode</span>
+            <span className="bg-[var(--bg-card-raised)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)]"><kbd>V</kbd> Voice</span>
+            <span className="bg-[var(--bg-card-raised)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)]"><kbd>H</kbd> Haptics</span>
           </div>
         </div>
       </footer>
 
-      {/* Accessibility & Controls Modal */}
+      {/* Settings Modal */}
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}

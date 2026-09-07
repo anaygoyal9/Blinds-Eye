@@ -13,135 +13,123 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
   isRunning,
   backendStatus,
 }) => {
-  // If not running, show Standby
+  // If not running, show a compact short Standby box
   if (!isRunning) {
     return (
-      <section
-        aria-label="Navigation System Status"
-        className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left transition-colors"
+      <div
+        role="status"
+        aria-label="Navigation Status Standby"
+        className="flex items-center gap-3 px-4 py-2.5 bg-[var(--bg-card)] border-2 border-[var(--border-subtle)] rounded-2xl text-[var(--text-secondary)] transition-colors"
       >
-        <div className="flex items-center gap-5">
-          <div className="w-18 h-18 rounded-2xl bg-[var(--bg-card-raised)] border-3 border-[var(--border-subtle)] flex items-center justify-center flex-shrink-0 text-[var(--color-focus)]">
-            <PauseCircle className="w-12 h-12" aria-hidden="true" />
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-widest font-black text-[var(--text-muted)]">
-              CURRENT SYSTEM STATUS
-            </p>
-            <h2 className="text-3xl md:text-5xl font-black text-[var(--text-primary)]">
-              STANDBY
-            </h2>
-            <p className="text-lg md:text-xl text-[var(--text-secondary)] font-semibold mt-1">
-              Press <strong className="text-[var(--color-focus)] underline">[START ASSISTANCE]</strong> or hit <kbd className="bg-[var(--bg-card-raised)] px-2 py-0.5 rounded border border-[var(--border-subtle)] font-mono text-sm">Space</kbd> to begin.
-            </p>
-          </div>
+        <PauseCircle className="w-6 h-6 text-[var(--color-focus)] flex-shrink-0" aria-hidden="true" />
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-black text-sm uppercase tracking-wider text-[var(--text-primary)]">
+            STANDBY
+          </span>
+          <span className="text-xs text-[var(--text-muted)] font-semibold">
+            · Press <strong className="text-[var(--color-focus)]">[START ASSISTANCE]</strong> or hit <kbd className="bg-black/60 px-1.5 py-0.5 rounded border border-[var(--border-subtle)] font-mono text-[11px]">Space</kbd>
+          </span>
         </div>
-      </section>
+      </div>
     );
   }
 
   // Backend offline warning
   if (backendStatus === 'offline') {
     return (
-      <section
+      <div
         role="alert"
         aria-live="assertive"
-        aria-label="Critical System Alert"
-        className="w-full bg-red-950 border-4 border-red-500 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left shadow-2xl"
+        className="flex items-center gap-3 px-4 py-3 bg-red-950 border-3 border-red-500 rounded-2xl text-red-100 shadow-xl"
       >
-        <div className="w-18 h-18 rounded-2xl bg-red-900 border-3 border-white flex items-center justify-center flex-shrink-0 text-white">
-          <WifiOff className="w-12 h-12" aria-hidden="true" />
+        <WifiOff className="w-6 h-6 text-white flex-shrink-0" aria-hidden="true" />
+        <div className="flex-1 flex items-center justify-between gap-2 flex-wrap">
+          <div>
+            <span className="font-black text-sm uppercase tracking-wider text-red-300 mr-2">
+              SERVER OFFLINE
+            </span>
+            <span className="text-xs font-bold text-white">
+              Cannot reach ML server. Run: <code className="bg-black px-2 py-0.5 rounded text-yellow-300 font-mono text-xs border border-yellow-400">python server.py</code>
+            </span>
+          </div>
         </div>
-        <div>
-          <p className="text-xs uppercase tracking-widest font-black text-red-300">
-            SYSTEM ALERT
-          </p>
-          <h2 className="text-3xl md:text-5xl font-black text-white">
-            BACKEND SERVER OFFLINE
-          </h2>
-          <p className="text-lg md:text-xl text-red-100 font-bold mt-1">
-            Cannot reach ML Server. Start local backend with: <code className="bg-black px-2.5 py-1 rounded text-yellow-300 font-mono text-base border border-yellow-400">python server.py</code>
-          </p>
-        </div>
-      </section>
+      </div>
     );
   }
 
-  // Active Alert: Critical vs Alert vs Clear
+  // Active Alert: Critical Stop
   if (activeAlert.status === 'CRITICAL') {
     return (
-      <section
+      <div
         role="alert"
         aria-live="assertive"
-        aria-label="Critical Obstacle Stop Alert"
-        className="w-full bg-[#3d0000] border-4 border-red-500 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left animate-pulse"
+        className="flex items-center gap-3 px-4 py-3 bg-[#3d0000] border-4 border-red-500 rounded-2xl text-white shadow-2xl animate-pulse"
       >
-        <div className="w-20 h-20 rounded-2xl bg-red-600 border-3 border-white flex items-center justify-center flex-shrink-0 text-white shadow-2xl">
-          <OctagonAlert className="w-14 h-14 stroke-[3]" aria-hidden="true" />
-        </div>
+        <OctagonAlert className="w-8 h-8 text-white flex-shrink-0 stroke-[3]" aria-hidden="true" />
         <div className="flex-1">
-          <div className="inline-block bg-red-600 text-white px-3 py-1 rounded-md text-xs font-black tracking-widest uppercase mb-1">
-            CRITICAL COLLISION WARNING
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="bg-red-600 text-white px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
+              CRITICAL STOP
+            </span>
+            <h2 className="text-lg md:text-xl font-black text-white">
+              {activeAlert.title}
+            </h2>
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-            {activeAlert.title}
-          </h2>
-          <p className="text-xl md:text-2xl text-red-100 font-black mt-2">
+          <p className="text-xs md:text-sm text-red-100 font-bold mt-0.5">
             {activeAlert.detail}
           </p>
         </div>
-      </section>
+      </div>
     );
   }
 
+  // Active Alert: Caution
   if (activeAlert.status === 'ALERT') {
     return (
-      <section
+      <div
         role="alert"
         aria-live="polite"
-        aria-label="Obstacle Warning"
-        className="w-full bg-[#332200] border-4 border-yellow-400 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left"
+        className="flex items-center gap-3 px-4 py-3 bg-[#332200] border-3 border-yellow-400 rounded-2xl text-yellow-100 shadow-lg"
       >
-        <div className="w-20 h-20 rounded-2xl bg-yellow-400 border-3 border-black flex items-center justify-center flex-shrink-0 text-black shadow-xl">
-          <AlertTriangle className="w-14 h-14 stroke-[3]" aria-hidden="true" />
-        </div>
+        <AlertTriangle className="w-7 h-7 text-yellow-400 flex-shrink-0 stroke-[3]" aria-hidden="true" />
         <div className="flex-1">
-          <div className="inline-block bg-yellow-400 text-black px-3 py-1 rounded-md text-xs font-black tracking-widest uppercase mb-1">
-            OBSTACLE CAUTION
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="bg-yellow-400 text-black px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
+              CAUTION
+            </span>
+            <h2 className="text-base md:text-lg font-black text-yellow-300">
+              {activeAlert.title}
+            </h2>
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-yellow-300 tracking-tight">
-            {activeAlert.title}
-          </h2>
-          <p className="text-xl md:text-2xl text-white font-black mt-1">
+          <p className="text-xs md:text-sm text-white font-bold mt-0.5">
             {activeAlert.detail}
           </p>
         </div>
-      </section>
+      </div>
     );
   }
 
-  // Clear path
+  // Path Clear
   return (
-    <section
+    <div
       role="status"
       aria-live="polite"
-      aria-label="Path Clear Status"
-      className="w-full bg-[#002b11] border-4 border-[#00e676] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-left"
+      className="flex items-center gap-3 px-4 py-3 bg-[#002b11] border-3 border-[#00e676] rounded-2xl text-[#00ff66] shadow-md"
     >
-      <div className="w-20 h-20 rounded-2xl bg-[#00e676] border-3 border-white flex items-center justify-center flex-shrink-0 text-black shadow-xl">
-        <ShieldCheck className="w-14 h-14 stroke-[3]" aria-hidden="true" />
-      </div>
+      <ShieldCheck className="w-7 h-7 text-[#00ff66] flex-shrink-0 stroke-[3]" aria-hidden="true" />
       <div className="flex-1">
-        <div className="inline-block bg-[#00e676] text-black px-3 py-1 rounded-md text-xs font-black tracking-widest uppercase mb-1">
-          SYSTEM STATUS: ALL CLEAR
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="bg-[#00e676] text-black px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
+            ALL CLEAR
+          </span>
+          <h2 className="text-base md:text-lg font-black text-[#00ff66]">
+            PATH CLEAR
+          </h2>
         </div>
-        <h2 className="text-3xl md:text-5xl font-black text-[#00ff66] tracking-tight">
-          PATH CLEAR
-        </h2>
-        <p className="text-xl md:text-2xl text-emerald-100 font-bold mt-1">
-          No immediate obstacles detected in walking corridor. Safe to proceed.
+        <p className="text-xs text-emerald-100 font-semibold mt-0.5">
+          Walking corridor is unobstructed. Safe to proceed.
         </p>
       </div>
-    </section>
+    </div>
   );
 };
