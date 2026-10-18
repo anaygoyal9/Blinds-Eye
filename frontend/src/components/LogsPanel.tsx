@@ -11,22 +11,22 @@ export const LogsPanel: React.FC<LogsPanelProps> = ({ logs, onClearLogs }) => {
   return (
     <section
       aria-label="Recent Spoken Alert History"
-      className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-7 shadow-xl transition-colors"
+      className="w-full bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-6 shadow-lg transition-colors"
     >
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[var(--border-subtle)] pb-2.5 sm:pb-3 mb-3 sm:mb-4">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)] pb-2.5 sm:pb-3 mb-3 sm:mb-4">
         <div className="flex items-center gap-2 sm:gap-2.5">
           <History className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-focus)] flex-shrink-0" aria-hidden="true" />
-          <h3 className="font-black text-sm sm:text-base md:text-lg text-[var(--text-primary)] uppercase tracking-wider">
-            RECENT ALERT HISTORY ({logs.length})
-          </h3>
+          <h2 className="font-bold text-sm sm:text-base md:text-lg text-[var(--text-primary)] tracking-wide">
+            Recent Alert History ({logs.length})
+          </h2>
         </div>
         {logs.length > 0 && onClearLogs && (
           <button
             onClick={onClearLogs}
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-[var(--bg-card-raised)] hover:bg-[var(--bg-card-hover)] text-xs font-black text-[var(--text-primary)] rounded-xl border-2 border-[var(--border-subtle)] transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 h-8 px-3 bg-[var(--bg-card-raised)] hover:bg-[var(--bg-card-hover)] text-xs font-bold text-[var(--text-primary)] rounded-lg border border-[var(--border-subtle)] hover:border-[var(--color-focus)] transition-colors cursor-pointer"
             aria-label="Clear alert history log"
           >
-            <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
+            <Trash2 className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Clear</span>
           </button>
         )}

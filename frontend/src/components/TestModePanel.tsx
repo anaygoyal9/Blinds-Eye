@@ -36,18 +36,18 @@ export const TestModePanel: React.FC<TestModePanelProps> = ({ onTriggerTest }) =
   return (
     <section
       aria-label="Diagnostic & Evaluation Test Matrix"
-      className="w-full bg-[var(--bg-card)] border-3 sm:border-4 border-purple-500 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-7 shadow-2xl transition-colors"
+      className="w-full bg-[var(--bg-card)] border border-purple-500/60 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-6 shadow-lg transition-colors"
     >
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-purple-900 pb-2.5 sm:pb-3 mb-4 sm:mb-5">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-purple-900/60 pb-2.5 sm:pb-3 mb-4 sm:mb-5">
         <div>
-          <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-purple-400">
-            DIAGNOSTIC & EVALUATION MODE
+          <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-purple-400">
+            Diagnostic & Evaluation
           </span>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-[var(--text-primary)]">
+          <h2 className="text-lg sm:text-xl font-bold text-[var(--text-primary)]">
             Interactive Test Matrix
-          </h3>
+          </h2>
         </div>
-        <span className="bg-purple-950 text-purple-300 border-2 border-purple-500 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-xl text-[10px] sm:text-xs font-black uppercase">
+        <span className="bg-purple-950 text-purple-300 border border-purple-500/60 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-semibold">
           Simulated Events
         </span>
       </div>

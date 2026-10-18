@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Square, Volume2, VolumeX, Smartphone, Headphones, Sparkles, Navigation, Wrench } from 'lucide-react';
+import { Play, Square, Volume2, VolumeX, Smartphone, Headphones, Sparkles, Activity, Wrench } from 'lucide-react';
 import { AppMode, AppSettings } from '../types/navigation';
 
 interface ControlsProps {
@@ -24,10 +24,10 @@ export const Controls: React.FC<ControlsProps> = ({
       {/* Primary Action Button (Start/Stop) */}
       <button
         onClick={onToggleRunning}
-        className={`w-full md:w-auto flex-1 min-h-[48px] sm:min-h-[52px] py-3 sm:py-3.5 px-4 sm:px-6 rounded-2xl font-black text-base sm:text-lg md:text-xl tracking-wide flex items-center justify-center gap-2 sm:gap-3 transition-all duration-150 active:scale-[0.98] shadow-lg cursor-pointer ${
+        className={`w-full md:w-auto flex-1 min-h-[46px] sm:min-h-[50px] py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl sm:rounded-2xl font-black text-base sm:text-lg md:text-xl tracking-wide flex items-center justify-center gap-2 sm:gap-3 transition-all duration-150 active:scale-[0.98] shadow-lg cursor-pointer ${
           isRunning
-            ? 'bg-red-600 hover:bg-red-500 text-white border-3 border-white shadow-red-950/80'
-            : 'bg-[#00e676] hover:bg-[#00ff66] text-black border-3 border-white shadow-emerald-950/80'
+            ? 'bg-red-600 hover:bg-red-500 text-white border-2 border-white shadow-red-950/80'
+            : 'bg-[#00e676] hover:bg-[#00ff66] text-black border-2 border-white shadow-emerald-950/80'
         }`}
         aria-label={
           isRunning
@@ -48,29 +48,29 @@ export const Controls: React.FC<ControlsProps> = ({
         )}
       </button>
 
-      {/* Mode Selector & Quick Toggles Toolbar */}
-      <div className="flex flex-wrap items-center justify-between md:justify-end gap-2 w-full md:w-auto">
+      {/* Unified Secondary Toolbar: Modes + Quick Toggles */}
+      <div className="flex items-center bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-1 gap-1 w-full md:w-auto justify-between md:justify-end">
         {/* Operating Modes */}
-        <div className="flex items-center bg-[var(--bg-card)] border-2 border-[var(--border-subtle)] rounded-xl p-1 gap-1">
+        <div role="group" aria-label="Operating Modes" className="flex items-center gap-1">
           <button
             onClick={() => onSetAppMode('assistance')}
-            className={`min-h-[38px] py-1.5 px-2.5 sm:px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
+            className={`h-8 px-2.5 sm:px-3 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
               appMode === 'assistance'
-                ? 'bg-[var(--color-focus)] text-black border-[var(--color-focus)] font-black'
-                : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-primary)] hover:border-[var(--color-focus)]'
+                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={appMode === 'assistance'}
           >
-            <Navigation className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+            <Activity className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
             <span>Live ML</span>
           </button>
 
           <button
             onClick={() => onSetAppMode('demo')}
-            className={`min-h-[38px] py-1.5 px-2.5 sm:px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
+            className={`h-8 px-2.5 sm:px-3 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
               appMode === 'demo'
-                ? 'bg-yellow-400 text-black border-yellow-400 font-black'
-                : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-primary)] hover:border-yellow-400'
+                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={appMode === 'demo'}
           >
@@ -80,10 +80,10 @@ export const Controls: React.FC<ControlsProps> = ({
 
           <button
             onClick={() => onSetAppMode('test')}
-            className={`min-h-[38px] py-1.5 px-2.5 sm:px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
+            className={`h-8 px-2.5 sm:px-3 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
               appMode === 'test'
-                ? 'bg-purple-400 text-black border-purple-400 font-black'
-                : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-primary)] hover:border-purple-400'
+                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={appMode === 'test'}
           >
@@ -92,21 +92,25 @@ export const Controls: React.FC<ControlsProps> = ({
           </button>
         </div>
 
+        {/* Subtle Vertical Divider */}
+        <div className="h-5 w-px bg-[var(--border-subtle)] mx-0.5" aria-hidden="true" />
+
         {/* Quick Toggles */}
-        <div className="flex items-center bg-[var(--bg-card)] border-2 border-[var(--border-subtle)] rounded-xl p-1 gap-1">
+        <div role="group" aria-label="Sensory Feedback Toggles" className="flex items-center gap-1">
           {/* Voice */}
           <button
             onClick={() => onUpdateSettings({ voiceEnabled: !settings.voiceEnabled })}
-            className={`min-h-[38px] min-w-[38px] p-2 rounded-lg text-xs font-black border flex items-center justify-center transition-colors cursor-pointer ${
+            className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors cursor-pointer ${
               settings.voiceEnabled
-                ? 'bg-[#00e676] text-black border-[#00e676]'
-                : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-muted)] opacity-60'
+                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
+                : 'bg-transparent text-[var(--text-muted)] hover:bg-white/10 hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={settings.voiceEnabled}
             title="Toggle Voice Announcements (Shortcut: V)"
+            aria-label="Toggle Voice Announcements (Shortcut: V)"
           >
             {settings.voiceEnabled ? (
-              <Volume2 className="w-4 h-4 text-black" aria-hidden="true" />
+              <Volume2 className="w-4 h-4" aria-hidden="true" />
             ) : (
               <VolumeX className="w-4 h-4" aria-hidden="true" />
             )}
@@ -117,29 +121,31 @@ export const Controls: React.FC<ControlsProps> = ({
             onClick={() =>
               onUpdateSettings({ spatialAudioEnabled: !settings.spatialAudioEnabled })
             }
-            className={`min-h-[38px] min-w-[38px] p-2 rounded-lg text-xs font-black border flex items-center justify-center transition-colors cursor-pointer ${
+            className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors cursor-pointer ${
               settings.spatialAudioEnabled
-                ? 'bg-[var(--color-focus)] text-black border-[var(--color-focus)]'
-                : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-muted)] opacity-60'
+                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
+                : 'bg-transparent text-[var(--text-muted)] hover:bg-white/10 hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={settings.spatialAudioEnabled}
             title="Toggle Spatial Audio Panning"
+            aria-label="Toggle Spatial Audio Panning"
           >
-            <Headphones className="w-4 h-4 text-black" aria-hidden="true" />
+            <Headphones className="w-4 h-4" aria-hidden="true" />
           </button>
 
           {/* Haptic */}
           <button
             onClick={() => onUpdateSettings({ hapticEnabled: !settings.hapticEnabled })}
-            className={`min-h-[38px] min-w-[38px] p-2 rounded-lg text-xs font-black border flex items-center justify-center transition-colors cursor-pointer ${
+            className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors cursor-pointer ${
               settings.hapticEnabled
-                ? 'bg-yellow-400 text-black border-yellow-400'
-                : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-muted)] opacity-60'
+                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
+                : 'bg-transparent text-[var(--text-muted)] hover:bg-white/10 hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={settings.hapticEnabled}
             title="Toggle Haptic Feedback (Shortcut: H)"
+            aria-label="Toggle Haptic Feedback (Shortcut: H)"
           >
-            <Smartphone className="w-4 h-4 text-black" aria-hidden="true" />
+            <Smartphone className="w-4 h-4" aria-hidden="true" />
           </button>
         </div>
       </div>

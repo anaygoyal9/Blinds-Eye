@@ -53,39 +53,45 @@ export const DirectionIndicator: React.FC<DirectionIndicatorProps> = ({
   return (
     <section
       aria-label="Spatial Direction Radar"
-      className="w-full bg-[var(--bg-card)] border-2 sm:border-3 border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3 sm:p-5 md:p-6 shadow-xl transition-colors"
+      className="w-full bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-6 shadow-lg transition-colors"
     >
-      <div className="flex items-center justify-between mb-2.5 sm:mb-4 border-b-2 border-[var(--border-subtle)] pb-2 sm:pb-3">
-        <h3 className="text-xs sm:text-base md:text-lg font-black uppercase tracking-wider sm:tracking-widest text-[var(--color-focus)]">
-          SPATIAL DIRECTION RADAR
-        </h3>
-        <span className="text-[10px] sm:text-xs md:text-sm font-black uppercase px-2 sm:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-lg bg-[var(--bg-card-raised)] border border-[var(--border-subtle)] text-[var(--text-primary)]">
-          {isRunning ? (isAlert ? '⚠ OBSTACLE' : '✓ CLEAR') : 'STANDBY'}
-        </span>
+      <div className="flex items-center justify-between mb-3 sm:mb-4 border-b border-[var(--border-subtle)] pb-2.5 sm:pb-3">
+        <h2 className="text-sm sm:text-base md:text-lg font-bold tracking-wide text-[var(--color-focus)]">
+          Spatial Direction Radar
+        </h2>
+        <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-muted)]">
+          <span
+            className={`w-2 h-2 rounded-full ${
+              isRunning ? (isAlert ? 'bg-yellow-400' : 'bg-emerald-400') : 'bg-gray-500'
+            }`}
+            aria-hidden="true"
+          />
+          <span>{isRunning ? (isAlert ? 'Obstacle Alert' : 'Path Clear') : 'Standby'}</span>
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
         {directions.map((d) => {
           const isActive = activeDirection === d.dir;
           let cardStyle =
-            'bg-[var(--bg-card-raised)] border-2 sm:border-3 border-[var(--border-subtle)] text-[var(--text-muted)] opacity-70';
+            'bg-[var(--bg-card-raised)] border border-[var(--border-subtle)] text-[var(--text-muted)] opacity-70';
           let badgeStyle =
             'bg-black/60 text-[var(--text-muted)] border border-[var(--border-subtle)]';
 
           if (!isRunning) {
             cardStyle =
-              'bg-[var(--bg-card-raised)] border-2 sm:border-3 border-[var(--border-subtle)] text-[var(--text-muted)] opacity-50';
+              'bg-[var(--bg-card-raised)] border border-[var(--border-subtle)] text-[var(--text-muted)] opacity-50';
           } else if (isActive && isCritical) {
             cardStyle =
-              'bg-[#3d0000] border-3 sm:border-4 border-red-500 text-white shadow-2xl scale-[1.02] sm:scale-[1.03] animate-pulse';
-            badgeStyle = 'bg-red-600 text-white font-black border border-white';
+              'bg-[#3d0000] border-2 sm:border-3 border-red-500 text-white shadow-2xl scale-[1.02] sm:scale-[1.03] animate-pulse';
+            badgeStyle = 'bg-red-600 text-white font-bold border border-white';
           } else if (isActive && isAlert) {
             cardStyle =
-              'bg-[#332200] border-3 sm:border-4 border-yellow-400 text-yellow-200 shadow-xl scale-[1.02]';
-            badgeStyle = 'bg-yellow-400 text-black font-black border border-black';
+              'bg-[#332200] border-2 sm:border-3 border-yellow-400 text-yellow-200 shadow-xl scale-[1.02]';
+            badgeStyle = 'bg-yellow-400 text-black font-bold border border-black';
           } else if (!isAlert) {
             cardStyle =
-              'bg-[#002b11] border-2 sm:border-3 border-[#00e676] text-[#00ff66]';
+              'bg-[#002b11] border border-[#00e676] text-[#00ff66]';
             badgeStyle = 'bg-[#005522] text-[#00ff66] border border-[#00ff66]';
           }
 
@@ -110,12 +116,18 @@ export const DirectionIndicator: React.FC<DirectionIndicatorProps> = ({
                 {d.label}
               </span>
 
-              {/* Obstacle Status Tag */}
-              <span
-                className={`mt-1 sm:mt-2.5 md:mt-3 px-1.5 sm:px-2.5 md:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-xl text-[9px] sm:text-xs md:text-sm font-black uppercase tracking-wider text-center max-w-full truncate ${badgeStyle}`}
-              >
-                {isRunning ? d.subtitle : 'STANDBY'}
-              </span>
+              {/* Obstacle Status Tag or Clean Standby Label */}
+              {isRunning ? (
+                <span
+                  className={`mt-1 sm:mt-2.5 md:mt-3 px-2 sm:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-xl text-[9px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-center max-w-full truncate ${badgeStyle}`}
+                >
+                  {d.subtitle}
+                </span>
+              ) : (
+                <span className="mt-1 sm:mt-2 text-[10px] sm:text-xs text-[var(--text-muted)] font-medium">
+                  Ready
+                </span>
+              )}
             </div>
           );
         })}

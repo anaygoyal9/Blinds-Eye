@@ -53,22 +53,22 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
   return (
     <section
       aria-label="Prioritized Detected Obstacles"
-      className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-7 shadow-xl transition-colors"
+      className="w-full bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-6 shadow-lg transition-colors"
     >
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-3 sm:mb-4 border-b-2 border-[var(--border-subtle)] pb-2.5 sm:pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3 sm:mb-4 border-b border-[var(--border-subtle)] pb-2.5 sm:pb-3">
         <div className="flex items-center gap-2 sm:gap-2.5">
           <Layers className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-focus)] flex-shrink-0" aria-hidden="true" />
-          <h3 className="font-black text-sm sm:text-base md:text-xl text-[var(--text-primary)] uppercase tracking-wider">
-            PRIORITIZED OBSTACLES ({isRunning ? obstacles.length : 0})
-          </h3>
+          <h2 className="font-bold text-sm sm:text-base md:text-lg text-[var(--text-primary)] tracking-wide">
+            Prioritized Obstacles ({isRunning ? obstacles.length : 0})
+          </h2>
         </div>
-        <span className="text-[11px] sm:text-xs md:text-sm text-[var(--text-muted)] font-black uppercase">
+        <span className="text-xs sm:text-sm text-[var(--text-muted)] font-medium">
           Sorted by Hazard Level
         </span>
       </div>
 
       {!isRunning || obstacles.length === 0 ? (
-        <div className="py-6 sm:py-8 px-4 text-center text-[var(--text-muted)] bg-[var(--bg-card-raised)] rounded-xl sm:rounded-2xl border-2 border-[var(--border-subtle)]">
+        <div className="py-6 sm:py-8 px-4 text-center text-[var(--text-muted)] bg-[var(--bg-card-raised)] rounded-xl sm:rounded-2xl border border-[var(--border-subtle)]">
           <p className="text-sm sm:text-base md:text-lg font-bold">
             {isRunning ? '✓ Walking corridor is clear. No obstacles detected.' : 'Navigation is paused.'}
           </p>
@@ -78,7 +78,7 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
           {obstacles.map((obs, index) => (
             <li
               key={obs.id || index}
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 md:p-5 bg-[var(--bg-card-raised)] border-3 border-[var(--border-subtle)] rounded-xl sm:rounded-2xl gap-3 sm:gap-4 transition-colors"
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 md:p-5 bg-[var(--bg-card-raised)] border border-[var(--border-subtle)] rounded-xl sm:rounded-2xl gap-3 sm:gap-4 transition-colors"
             >
               {/* Obstacle info */}
               <div className="flex items-center gap-2.5 sm:gap-3.5">

@@ -5,7 +5,7 @@ export const SafetyDisclaimer: React.FC = () => {
   return (
     <aside
       aria-label="Important Safety Notice"
-      className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-6 text-[var(--text-secondary)] transition-colors"
+      className="w-full bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-6 text-[var(--text-secondary)] transition-colors"
     >
       <div className="flex items-start gap-3 sm:gap-4">
         <ShieldAlert className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
