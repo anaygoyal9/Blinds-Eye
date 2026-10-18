@@ -20,11 +20,11 @@ export const Controls: React.FC<ControlsProps> = ({
   onUpdateSettings,
 }) => {
   return (
-    <section aria-label="System Controls" className="w-full flex flex-col md:flex-row items-center justify-between gap-3">
+    <section aria-label="System Controls" className="w-full flex flex-col md:flex-row items-center justify-between gap-2.5 sm:gap-3">
       {/* Primary Action Button (Start/Stop) */}
       <button
         onClick={onToggleRunning}
-        className={`w-full md:w-auto flex-1 py-3.5 px-6 rounded-2xl font-black text-lg md:text-xl tracking-wide flex items-center justify-center gap-3 transition-all duration-150 active:scale-[0.98] shadow-lg cursor-pointer ${
+        className={`w-full md:w-auto flex-1 min-h-[48px] sm:min-h-[52px] py-3 sm:py-3.5 px-4 sm:px-6 rounded-2xl font-black text-base sm:text-lg md:text-xl tracking-wide flex items-center justify-center gap-2 sm:gap-3 transition-all duration-150 active:scale-[0.98] shadow-lg cursor-pointer ${
           isRunning
             ? 'bg-red-600 hover:bg-red-500 text-white border-3 border-white shadow-red-950/80'
             : 'bg-[#00e676] hover:bg-[#00ff66] text-black border-3 border-white shadow-emerald-950/80'
@@ -37,12 +37,12 @@ export const Controls: React.FC<ControlsProps> = ({
       >
         {isRunning ? (
           <>
-            <Square className="w-6 h-6 fill-current" aria-hidden="true" />
+            <Square className="w-5 h-5 sm:w-6 sm:h-6 fill-current flex-shrink-0" aria-hidden="true" />
             <span>STOP ASSISTANCE (Space)</span>
           </>
         ) : (
           <>
-            <Play className="w-6 h-6 fill-current" aria-hidden="true" />
+            <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current flex-shrink-0" aria-hidden="true" />
             <span>START ASSISTANCE (Space)</span>
           </>
         )}
@@ -54,40 +54,40 @@ export const Controls: React.FC<ControlsProps> = ({
         <div className="flex items-center bg-[var(--bg-card)] border-2 border-[var(--border-subtle)] rounded-xl p-1 gap-1">
           <button
             onClick={() => onSetAppMode('assistance')}
-            className={`py-1.5 px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
+            className={`min-h-[38px] py-1.5 px-2.5 sm:px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
               appMode === 'assistance'
                 ? 'bg-[var(--color-focus)] text-black border-[var(--color-focus)] font-black'
                 : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-primary)] hover:border-[var(--color-focus)]'
             }`}
             aria-pressed={appMode === 'assistance'}
           >
-            <Navigation className="w-3.5 h-3.5" aria-hidden="true" />
+            <Navigation className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
             <span>Live ML</span>
           </button>
 
           <button
             onClick={() => onSetAppMode('demo')}
-            className={`py-1.5 px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
+            className={`min-h-[38px] py-1.5 px-2.5 sm:px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
               appMode === 'demo'
                 ? 'bg-yellow-400 text-black border-yellow-400 font-black'
                 : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-primary)] hover:border-yellow-400'
             }`}
             aria-pressed={appMode === 'demo'}
           >
-            <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+            <Sparkles className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
             <span>Demo</span>
           </button>
 
           <button
             onClick={() => onSetAppMode('test')}
-            className={`py-1.5 px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
+            className={`min-h-[38px] py-1.5 px-2.5 sm:px-3 rounded-lg text-xs font-black flex items-center gap-1 border transition-colors cursor-pointer ${
               appMode === 'test'
                 ? 'bg-purple-400 text-black border-purple-400 font-black'
                 : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-primary)] hover:border-purple-400'
             }`}
             aria-pressed={appMode === 'test'}
           >
-            <Wrench className="w-3.5 h-3.5" aria-hidden="true" />
+            <Wrench className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
             <span>Test (T)</span>
           </button>
         </div>
@@ -97,7 +97,7 @@ export const Controls: React.FC<ControlsProps> = ({
           {/* Voice */}
           <button
             onClick={() => onUpdateSettings({ voiceEnabled: !settings.voiceEnabled })}
-            className={`p-1.5 rounded-lg text-xs font-black border transition-colors cursor-pointer ${
+            className={`min-h-[38px] min-w-[38px] p-2 rounded-lg text-xs font-black border flex items-center justify-center transition-colors cursor-pointer ${
               settings.voiceEnabled
                 ? 'bg-[#00e676] text-black border-[#00e676]'
                 : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-muted)] opacity-60'
@@ -117,7 +117,7 @@ export const Controls: React.FC<ControlsProps> = ({
             onClick={() =>
               onUpdateSettings({ spatialAudioEnabled: !settings.spatialAudioEnabled })
             }
-            className={`p-1.5 rounded-lg text-xs font-black border transition-colors cursor-pointer ${
+            className={`min-h-[38px] min-w-[38px] p-2 rounded-lg text-xs font-black border flex items-center justify-center transition-colors cursor-pointer ${
               settings.spatialAudioEnabled
                 ? 'bg-[var(--color-focus)] text-black border-[var(--color-focus)]'
                 : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-muted)] opacity-60'
@@ -131,7 +131,7 @@ export const Controls: React.FC<ControlsProps> = ({
           {/* Haptic */}
           <button
             onClick={() => onUpdateSettings({ hapticEnabled: !settings.hapticEnabled })}
-            className={`p-1.5 rounded-lg text-xs font-black border transition-colors cursor-pointer ${
+            className={`min-h-[38px] min-w-[38px] p-2 rounded-lg text-xs font-black border flex items-center justify-center transition-colors cursor-pointer ${
               settings.hapticEnabled
                 ? 'bg-yellow-400 text-black border-yellow-400'
                 : 'bg-[var(--bg-card-raised)] border-transparent text-[var(--text-muted)] opacity-60'

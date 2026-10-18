@@ -40,30 +40,30 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="settings-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-sm overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
       <div
         ref={modalRef}
-        className="w-full max-w-2xl bg-[var(--bg-card)] border-4 border-[var(--border-strong)] rounded-3xl p-6 md:p-8 shadow-2xl my-8 text-[var(--text-primary)] max-h-[90vh] overflow-y-auto transition-colors"
+        className="w-full max-w-2xl bg-[var(--bg-card)] border-3 sm:border-4 border-[var(--border-strong)] rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl my-2 sm:my-8 text-[var(--text-primary)] max-h-[92dvh] overflow-y-auto transition-colors"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b-3 border-[var(--border-subtle)] pb-4 mb-6">
-          <div className="flex items-center gap-3">
-            <Sliders className="w-8 h-8 text-[var(--color-focus)]" aria-hidden="true" />
-            <h2 id="settings-title" className="text-2xl md:text-3xl font-black text-[var(--text-primary)]">
+        <div className="flex items-center justify-between border-b-2 sm:border-b-3 border-[var(--border-subtle)] pb-3 sm:pb-4 mb-4 sm:mb-6">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <Sliders className="w-6 h-6 sm:w-8 sm:h-8 text-[var(--color-focus)] flex-shrink-0" aria-hidden="true" />
+            <h2 id="settings-title" className="text-xl sm:text-2xl md:text-3xl font-black text-[var(--text-primary)]">
               Accessibility & Controls
             </h2>
           </div>
           <button
             ref={closeBtnRef}
             onClick={onClose}
-            className="p-3 bg-[var(--bg-card-raised)] hover:bg-[var(--bg-card-hover)] border-2 border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] font-black transition-colors cursor-pointer"
+            className="p-2 sm:p-3 bg-[var(--bg-card-raised)] hover:bg-[var(--bg-card-hover)] border-2 border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] font-black transition-colors cursor-pointer flex-shrink-0"
             aria-label="Close Settings dialog (Shortcut: Escape)"
           >
-            <X className="w-6 h-6" aria-hidden="true" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
           </button>
         </div>
 
@@ -114,7 +114,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 </label>
                 <SunMoon className="w-4 h-4 text-yellow-400" aria-hidden="true" />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {(
                   [
                     {
@@ -344,20 +344,20 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="mt-7 pt-4 border-t-3 border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-3">
+        <div className="mt-5 sm:mt-7 pt-3 sm:pt-4 border-t-2 sm:border-t-3 border-[var(--border-subtle)] flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3">
           <button
             onClick={onResetSettings}
-            className="flex items-center gap-2 px-5 py-3 bg-[var(--bg-card-raised)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] border-2 border-[var(--border-subtle)] rounded-2xl font-bold text-sm transition-colors cursor-pointer"
+            className="flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 bg-[var(--bg-card-raised)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] border-2 border-[var(--border-subtle)] rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm transition-colors cursor-pointer"
           >
-            <RotateCcw className="w-4 h-4" aria-hidden="true" />
+            <RotateCcw className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
             <span>Reset to Defaults</span>
           </button>
 
           <button
             onClick={onClose}
-            className="flex items-center gap-2 px-7 py-3.5 bg-[var(--color-focus)] hover:opacity-90 text-black border-2 border-white rounded-2xl font-black text-lg transition-colors shadow-2xl cursor-pointer"
+            className="flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 bg-[var(--color-focus)] hover:opacity-90 text-black border-2 border-white rounded-xl sm:rounded-2xl font-black text-base sm:text-lg transition-colors shadow-2xl cursor-pointer"
           >
-            <Check className="w-6 h-6 stroke-[3]" aria-hidden="true" />
+            <Check className="w-5 h-5 sm:w-6 sm:h-6 stroke-[3] flex-shrink-0" aria-hidden="true" />
             <span>Done (Esc)</span>
           </button>
         </div>

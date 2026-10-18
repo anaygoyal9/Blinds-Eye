@@ -19,15 +19,15 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
       <div
         role="status"
         aria-label="Navigation Status Standby"
-        className="flex items-center gap-3 px-4 py-2.5 bg-[var(--bg-card)] border-2 border-[var(--border-subtle)] rounded-2xl text-[var(--text-secondary)] transition-colors"
+        className="flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 bg-[var(--bg-card)] border-2 border-[var(--border-subtle)] rounded-xl sm:rounded-2xl text-[var(--text-secondary)] transition-colors"
       >
-        <PauseCircle className="w-6 h-6 text-[var(--color-focus)] flex-shrink-0" aria-hidden="true" />
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-black text-sm uppercase tracking-wider text-[var(--text-primary)]">
+        <PauseCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-focus)] flex-shrink-0" aria-hidden="true" />
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+          <span className="font-black text-xs sm:text-sm uppercase tracking-wider text-[var(--text-primary)]">
             STANDBY
           </span>
-          <span className="text-xs text-[var(--text-muted)] font-semibold">
-            · Press <strong className="text-[var(--color-focus)]">[START ASSISTANCE]</strong> or hit <kbd className="bg-black/60 px-1.5 py-0.5 rounded border border-[var(--border-subtle)] font-mono text-[11px]">Space</kbd>
+          <span className="text-[11px] sm:text-xs text-[var(--text-muted)] font-semibold">
+            · Press <strong className="text-[var(--color-focus)]">[START ASSISTANCE]</strong> or hit <kbd className="bg-black/60 px-1.5 py-0.5 rounded border border-[var(--border-subtle)] font-mono text-[10px] sm:text-[11px]">Space</kbd>
           </span>
         </div>
       </div>

@@ -53,68 +53,68 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
   return (
     <section
       aria-label="Prioritized Detected Obstacles"
-      className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-3xl p-5 md:p-7 shadow-xl transition-colors"
+      className="w-full bg-[var(--bg-card)] border-3 border-[var(--border-subtle)] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-7 shadow-xl transition-colors"
     >
-      <div className="flex items-center justify-between mb-4 border-b-2 border-[var(--border-subtle)] pb-3">
-        <div className="flex items-center gap-2.5">
-          <Layers className="w-6 h-6 text-[var(--color-focus)]" aria-hidden="true" />
-          <h3 className="font-black text-lg md:text-xl text-[var(--text-primary)] uppercase tracking-wider">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3 sm:mb-4 border-b-2 border-[var(--border-subtle)] pb-2.5 sm:pb-3">
+        <div className="flex items-center gap-2 sm:gap-2.5">
+          <Layers className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-focus)] flex-shrink-0" aria-hidden="true" />
+          <h3 className="font-black text-sm sm:text-base md:text-xl text-[var(--text-primary)] uppercase tracking-wider">
             PRIORITIZED OBSTACLES ({isRunning ? obstacles.length : 0})
           </h3>
         </div>
-        <span className="text-xs md:text-sm text-[var(--text-muted)] font-black uppercase">
+        <span className="text-[11px] sm:text-xs md:text-sm text-[var(--text-muted)] font-black uppercase">
           Sorted by Hazard Level
         </span>
       </div>
 
       {!isRunning || obstacles.length === 0 ? (
-        <div className="py-8 text-center text-[var(--text-muted)] bg-[var(--bg-card-raised)] rounded-2xl border-2 border-[var(--border-subtle)]">
-          <p className="text-base md:text-lg font-bold">
+        <div className="py-6 sm:py-8 px-4 text-center text-[var(--text-muted)] bg-[var(--bg-card-raised)] rounded-xl sm:rounded-2xl border-2 border-[var(--border-subtle)]">
+          <p className="text-sm sm:text-base md:text-lg font-bold">
             {isRunning ? '✓ Walking corridor is clear. No obstacles detected.' : 'Navigation is paused.'}
           </p>
         </div>
       ) : (
-        <ul className="space-y-3" role="list">
+        <ul className="space-y-2.5 sm:space-y-3" role="list">
           {obstacles.map((obs, index) => (
             <li
               key={obs.id || index}
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 md:p-5 bg-[var(--bg-card-raised)] border-3 border-[var(--border-subtle)] rounded-2xl gap-4 transition-colors"
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 md:p-5 bg-[var(--bg-card-raised)] border-3 border-[var(--border-subtle)] rounded-xl sm:rounded-2xl gap-3 sm:gap-4 transition-colors"
             >
               {/* Obstacle info */}
-              <div className="flex items-center gap-3.5">
-                <span className="w-8 h-8 rounded-full bg-black border-2 border-[var(--border-strong)] flex items-center justify-center font-mono font-black text-sm text-[var(--color-focus)]">
+              <div className="flex items-center gap-2.5 sm:gap-3.5">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black border-2 border-[var(--border-strong)] flex items-center justify-center font-mono font-black text-xs sm:text-sm text-[var(--color-focus)] flex-shrink-0">
                   {index + 1}
                 </span>
                 <div>
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-xl md:text-2xl font-black text-[var(--text-primary)] capitalize">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-base sm:text-xl md:text-2xl font-black text-[var(--text-primary)] capitalize">
                       {obs.displayName}
                     </span>
                     <span
-                      className={`text-xs font-black uppercase px-2.5 py-0.5 rounded-md ${getPriorityBadge(
+                      className={`text-[10px] sm:text-xs font-black uppercase px-2 sm:px-2.5 py-0.5 rounded-md ${getPriorityBadge(
                         obs.priority
                       )}`}
                     >
                       {obs.priority}
                     </span>
                   </div>
-                  <span className="text-xs text-[var(--text-muted)] font-mono font-bold">
+                  <span className="text-[11px] sm:text-xs text-[var(--text-muted)] font-mono font-bold block">
                     Confidence: {(obs.confidence * 100).toFixed(0)}%
                   </span>
                 </div>
               </div>
 
               {/* Direction & Proximity Badges */}
-              <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
-                <span className="font-black text-base md:text-lg text-[var(--text-primary)] bg-black px-4 py-2 rounded-xl border-2 border-[var(--border-strong)]">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                <span className="font-black text-xs sm:text-base md:text-lg text-[var(--text-primary)] bg-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border-2 border-[var(--border-strong)]">
                   {getDirectionText(obs.direction)}
                 </span>
                 <span
-                  className={`text-xs md:text-sm font-black uppercase px-3.5 py-2 rounded-xl border flex items-center gap-1.5 ${getProximityBadge(
+                  className={`text-xs md:text-sm font-black uppercase px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border flex items-center gap-1.5 ${getProximityBadge(
                     obs.proximityLevel
                   )}`}
                 >
-                  <AlertTriangle className="w-4 h-4" aria-hidden="true" />
+                  <AlertTriangle className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" aria-hidden="true" />
                   {obs.proximityLevel} ({obs.proximity})
                 </span>
               </div>

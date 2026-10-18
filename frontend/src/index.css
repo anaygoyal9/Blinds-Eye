@@ -63,30 +63,36 @@
   --color-accent: #ffff00;
 }
 
-/* Government-style Font Scaling (A-, A, A+) */
+/* Government-style Font Scaling (A-, A, A+) with Fluid Clamping */
 .text-size-normal {
   --scale-factor: 1;
-  font-size: 16px;
+  font-size: clamp(14px, 1vw + 11px, 16px);
 }
 
 .text-size-large {
-  --scale-factor: 1.25;
-  font-size: 19px;
+  --scale-factor: 1.2;
+  font-size: clamp(16px, 1.3vw + 12px, 19px);
 }
 
 .text-size-extra-large {
-  --scale-factor: 1.5;
-  font-size: 22px;
+  --scale-factor: 1.4;
+  font-size: clamp(18px, 1.6vw + 13px, 22px);
 }
 
 html, body {
   font-family: var(--font-primary);
   background-color: var(--bg-main) !important;
   color: var(--text-primary) !important;
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0;
   padding: 0;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  min-height: 100vh;
+  min-height: 100dvh;
   transition: background-color 0.15s ease, color 0.15s ease;
+  overflow-x: hidden;
 }
 
 /* Theme Surface Classes */
