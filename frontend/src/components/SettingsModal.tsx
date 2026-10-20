@@ -118,14 +118,24 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 {(
                   [
                     {
+                      id: 'bright-day',
+                      title: '☀️ Bright Day Mode',
+                      subtitle: 'Crisp daylight surface with deep slate black text (20:1 contrast)',
+                    },
+                    {
                       id: 'standard-dark',
-                      title: 'Standard Dark',
-                      subtitle: 'White text on deep dark surface (18:1 contrast)',
+                      title: '🌙 Standard Dark',
+                      subtitle: 'White text on deep dark surface for nighttime use (18:1 contrast)',
+                    },
+                    {
+                      id: 'system',
+                      title: '💻 System Auto Sync',
+                      subtitle: 'Automatically matches your device dark or bright appearance',
                     },
                     {
                       id: 'ultra-high-contrast',
                       title: '⚡ Ultra Yellow / Black',
-                      subtitle: 'Pure yellow on true pitch black (21:1 contrast)',
+                      subtitle: 'Pure yellow on true pitch black for low vision (21:1 contrast)',
                     },
                   ] as Array<{ id: ContrastTheme; title: string; subtitle: string }>
                 ).map((theme) => (
@@ -134,8 +144,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     onClick={() => onUpdateSettings({ contrastTheme: theme.id })}
                     className={`p-3 rounded-xl text-left border-3 transition-all cursor-pointer ${
                       settings.contrastTheme === theme.id
-                        ? 'bg-yellow-400 text-black border-yellow-400 font-black shadow-lg scale-[1.02]'
-                        : 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-yellow-400'
+                        ? theme.id === 'ultra-high-contrast'
+                          ? 'bg-[#ffff00] text-black border-[#ffff00] font-black shadow-lg scale-[1.02]'
+                          : 'bg-[var(--color-focus)] text-white dark:text-black border-[var(--color-focus)] font-black shadow-lg scale-[1.02]'
+                        : 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--color-focus)]'
                     }`}
                     aria-pressed={settings.contrastTheme === theme.id}
                   >

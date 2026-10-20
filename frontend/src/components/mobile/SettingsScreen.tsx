@@ -9,9 +9,8 @@ import {
   Sliders,
   ChevronRight,
   PhoneCall,
-  SunMoon,
 } from 'lucide-react';
-import { AppSettings, ContrastTheme, TextSize } from '../../types/navigation';
+import { AppSettings, TextSize } from '../../types/navigation';
 import { hapticService } from '../../services/hapticService';
 import { speechService } from '../../services/speechService';
 
@@ -30,11 +29,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 }) => {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
-  const toggleContrast = () => {
-    const nextTheme: ContrastTheme =
-      settings.contrastTheme === 'ultra-high-contrast' ? 'standard-dark' : 'ultra-high-contrast';
-    onUpdateSettings({ contrastTheme: nextTheme });
-  };
+
 
   const handleTestVibration = () => {
     hapticService.alertLeft();
@@ -51,7 +46,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       <header className="flex items-center gap-3 py-2 border-b border-[var(--border-subtle)] mb-4">
         <button
           onClick={onBack}
-          className="p-2 -ml-2 rounded-xl text-[var(--text-primary)] hover:bg-white/10 cursor-pointer"
+          className="p-2 -ml-2 rounded-xl text-[var(--text-primary)] hover:bg-[var(--bg-card-raised)] cursor-pointer"
           aria-label="Back to Dashboard"
         >
           <ArrowLeft className="w-6 h-6" aria-hidden="true" />
@@ -243,26 +238,33 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
               <div>
                 <span className="block text-xs font-bold text-[var(--text-muted)] mb-1.5 uppercase">
-                  Low-Vision Contrast Theme
+                  Appearance Theme
                 </span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleContrast();
-                  }}
-                  className={`w-full py-2 px-3 rounded-lg text-xs font-bold border flex items-center justify-center gap-2 cursor-pointer ${
-                    settings.contrastTheme === 'ultra-high-contrast'
-                      ? 'bg-yellow-400 text-black border-yellow-400 font-black'
-                      : 'border-[var(--border-subtle)] text-[var(--text-primary)]'
-                  }`}
-                >
-                  <SunMoon className="w-4 h-4" />
-                  <span>
-                    {settings.contrastTheme === 'ultra-high-contrast'
-                      ? '⚡ Yellow/Black (Active)'
-                      : 'Switch to Ultra Yellow/Black'}
-                  </span>
-                </button>
+                <div className="grid grid-cols-2 gap-2">
+                  {(
+                    [
+                      { id: 'bright-day', label: '☀️ Day Mode' },
+                      { id: 'standard-dark', label: '🌙 Dark Mode' },
+                      { id: 'system', label: '💻 Auto (OS)' },
+                      { id: 'ultra-high-contrast', label: '⚡ Yellow/Black' },
+                    ] as const
+                  ).map((th) => (
+                    <button
+                      key={th.id}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onUpdateSettings({ contrastTheme: th.id });
+                      }}
+                      className={`py-2 px-2.5 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                        settings.contrastTheme === th.id
+                          ? 'bg-[var(--color-focus)] text-white dark:text-black border-[var(--color-focus)] font-black'
+                          : 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--color-focus)]'
+                      }`}
+                    >
+                      {th.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           )}

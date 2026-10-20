@@ -28,7 +28,7 @@ export const SosModal: React.FC<SosModalProps> = ({ isOpen, onClose }) => {
         <div className="flex justify-end">
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-red-200 hover:bg-white/10"
+            className="p-2 rounded-xl text-red-200 hover:bg-[var(--bg-card-raised)]"
             aria-label="Close Emergency Dialog"
           >
             <X className="w-6 h-6" />

@@ -43,10 +43,10 @@ export const LogsPanel: React.FC<LogsPanelProps> = ({ logs, onClearLogs }) => {
               key={entry.id}
               className={`flex items-start justify-between p-3.5 rounded-xl border-2 text-xs md:text-sm ${
                 entry.priority === 'critical'
-                  ? 'bg-[#3d0000] border-red-500 text-red-200'
+                  ? 'bg-[var(--color-alert-bg)] border-[var(--color-alert-border)] text-[var(--color-alert)]'
                   : entry.isAlert
-                  ? 'bg-[#332200] border-yellow-400 text-yellow-200'
-                  : 'bg-[#002b11] border-[#00e676] text-[#00ff66]'
+                  ? 'bg-[var(--color-warning-bg)] border-[var(--color-warning-border)] text-[var(--color-warning)]'
+                  : 'bg-[var(--color-clear-bg)] border-[var(--color-clear-border)] text-[var(--color-clear)]'
               }`}
             >
               <div className="flex-1">
@@ -58,7 +58,7 @@ export const LogsPanel: React.FC<LogsPanelProps> = ({ logs, onClearLogs }) => {
               </div>
 
               {entry.direction !== 'none' && (
-                <span className="font-black uppercase ml-3 px-2.5 py-1 rounded-lg bg-black border border-[var(--border-subtle)] text-[var(--color-focus)] text-xs flex-shrink-0">
+                <span className="font-black uppercase ml-3 px-2.5 py-1 rounded-lg bg-[var(--bg-card-raised)] border border-[var(--border-subtle)] text-[var(--color-focus)] text-xs flex-shrink-0">
                   {entry.direction}
                 </span>
               )}

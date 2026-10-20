@@ -33,7 +33,7 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
       case 'approaching':
         return 'text-cyan-200 bg-cyan-950 border border-cyan-400';
       case 'far':
-        return 'text-gray-300 bg-gray-900 border border-gray-600';
+        return 'text-[var(--text-secondary)] bg-[var(--bg-card)] border border-[var(--border-subtle)]';
     }
   };
 
@@ -82,7 +82,7 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
             >
               {/* Obstacle info */}
               <div className="flex items-center gap-2.5 sm:gap-3.5">
-                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black border-2 border-[var(--border-strong)] flex items-center justify-center font-mono font-black text-xs sm:text-sm text-[var(--color-focus)] flex-shrink-0">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[var(--bg-card)] border-2 border-[var(--border-strong)] flex items-center justify-center font-mono font-black text-xs sm:text-sm text-[var(--color-focus)] flex-shrink-0">
                   {index + 1}
                 </span>
                 <div>
@@ -106,7 +106,7 @@ export const ObstaclesList: React.FC<ObstaclesListProps> = ({
 
               {/* Direction & Proximity Badges */}
               <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
-                <span className="font-black text-xs sm:text-base md:text-lg text-[var(--text-primary)] bg-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border-2 border-[var(--border-strong)]">
+                <span className="font-black text-xs sm:text-base md:text-lg text-[var(--text-primary)] bg-[var(--bg-card)] px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border-2 border-[var(--border-strong)]">
                   {getDirectionText(obs.direction)}
                 </span>
                 <span

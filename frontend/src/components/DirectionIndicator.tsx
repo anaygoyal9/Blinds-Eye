@@ -83,16 +83,16 @@ export const DirectionIndicator: React.FC<DirectionIndicatorProps> = ({
               'bg-[var(--bg-card-raised)] border border-[var(--border-subtle)] text-[var(--text-muted)] opacity-50';
           } else if (isActive && isCritical) {
             cardStyle =
-              'bg-[#3d0000] border-2 sm:border-3 border-red-500 text-white shadow-2xl scale-[1.02] sm:scale-[1.03] animate-pulse';
-            badgeStyle = 'bg-red-600 text-white font-bold border border-white';
+              'bg-[var(--color-alert-bg)] border-2 sm:border-3 border-[var(--color-alert-border)] text-[var(--color-alert)] shadow-2xl scale-[1.02] sm:scale-[1.03] animate-pulse';
+            badgeStyle = 'bg-[var(--color-alert)] text-white font-bold border border-white';
           } else if (isActive && isAlert) {
             cardStyle =
-              'bg-[#332200] border-2 sm:border-3 border-yellow-400 text-yellow-200 shadow-xl scale-[1.02]';
-            badgeStyle = 'bg-yellow-400 text-black font-bold border border-black';
+              'bg-[var(--color-warning-bg)] border-2 sm:border-3 border-[var(--color-warning-border)] text-[var(--color-warning)] shadow-xl scale-[1.02]';
+            badgeStyle = 'bg-[var(--color-warning)] text-white font-bold border border-current';
           } else if (!isAlert) {
             cardStyle =
-              'bg-[#002b11] border border-[#00e676] text-[#00ff66]';
-            badgeStyle = 'bg-[#005522] text-[#00ff66] border border-[#00ff66]';
+              'bg-[var(--color-clear-bg)] border border-[var(--color-clear-border)] text-[var(--color-clear)]';
+            badgeStyle = 'bg-[var(--color-clear)] text-white border border-[var(--color-clear-border)]';
           }
 
           return (
@@ -105,7 +105,7 @@ export const DirectionIndicator: React.FC<DirectionIndicatorProps> = ({
               {/* Direction Icon */}
               <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 flex items-center justify-center mb-1 sm:mb-2 md:mb-3">
                 {!isAlert && isRunning ? (
-                  <CheckCircle2 className="w-full h-full text-[#00ff66]" aria-hidden="true" />
+                  <CheckCircle2 className="w-full h-full text-[var(--color-clear)]" aria-hidden="true" />
                 ) : (
                   d.icon("w-full h-full stroke-[3] sm:stroke-[3.5]")
                 )}

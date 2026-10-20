@@ -8,7 +8,10 @@ import {
   AlertTriangle,
   PhoneCall,
   ChevronRight,
-  SunMoon,
+  Sun,
+  Moon,
+  Laptop,
+  Zap,
 } from 'lucide-react';
 import { AppSettings, BackendStatus, ContrastTheme } from '../../types/navigation';
 
@@ -33,12 +36,40 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onUpdateSettings,
   batteryLevel = 85,
 }) => {
-  const isUltraContrast = settings.contrastTheme === 'ultra-high-contrast';
-
-  const toggleContrast = () => {
-    const nextTheme: ContrastTheme = isUltraContrast ? 'standard-dark' : 'ultra-high-contrast';
+  const cycleTheme = () => {
+    const sequence: ContrastTheme[] = ['bright-day', 'standard-dark', 'system', 'ultra-high-contrast'];
+    const currentIndex = sequence.indexOf(settings.contrastTheme);
+    const nextTheme = sequence[(currentIndex + 1) % sequence.length];
     onUpdateSettings({ contrastTheme: nextTheme });
   };
+
+  const getThemeButtonContent = () => {
+    switch (settings.contrastTheme) {
+      case 'bright-day':
+        return {
+          icon: <Sun className="w-3.5 h-3.5 text-amber-500 fill-amber-500/20" aria-hidden="true" />,
+          label: 'Day',
+        };
+      case 'standard-dark':
+        return {
+          icon: <Moon className="w-3.5 h-3.5 text-blue-400 fill-blue-400/20" aria-hidden="true" />,
+          label: 'Dark',
+        };
+      case 'system':
+        return {
+          icon: <Laptop className="w-3.5 h-3.5 text-[var(--color-focus)]" aria-hidden="true" />,
+          label: 'Auto',
+        };
+      case 'ultra-high-contrast':
+      default:
+        return {
+          icon: <Zap className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300" aria-hidden="true" />,
+          label: 'High',
+        };
+    }
+  };
+
+  const themeDisplay = getThemeButtonContent();
 
   return (
     <div className="flex flex-col min-h-screen px-4 pt-3 pb-24 bg-[var(--bg-main)] text-[var(--text-primary)] max-w-md mx-auto transition-colors">
@@ -46,7 +77,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       <header className="flex items-center justify-between py-2 border-b border-[var(--border-subtle)] mb-3">
         <button
           onClick={onOpenSettings}
-          className="p-2 rounded-xl text-[var(--text-primary)] hover:bg-white/10 cursor-pointer"
+          className="p-2 rounded-xl text-[var(--text-primary)] hover:bg-[var(--bg-card-raised)] cursor-pointer"
           aria-label="Open App Menu"
         >
           <Menu className="w-6 h-6" aria-hidden="true" />
@@ -58,7 +89,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
         <button
           onClick={onOpenSettings}
-          className="p-2 rounded-xl text-[var(--text-primary)] hover:bg-white/10 cursor-pointer"
+          className="p-2 rounded-xl text-[var(--text-primary)] hover:bg-[var(--bg-card-raised)] cursor-pointer"
           aria-label="Open Settings"
         >
           <SettingsIcon className="w-6 h-6 text-[var(--color-focus)]" aria-hidden="true" />
@@ -89,16 +120,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </div>
 
         <button
-          onClick={toggleContrast}
+          onClick={cycleTheme}
           className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors flex items-center gap-1.5 cursor-pointer ${
-            isUltraContrast
+            settings.contrastTheme === 'ultra-high-contrast'
               ? 'bg-[#ffff00] text-black border-[#ffff00] font-black'
-              : 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-primary)]'
+              : 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--color-focus)]'
           }`}
-          aria-label="Toggle Yellow/Black High Contrast"
+          aria-label={`Visual theme: ${themeDisplay.label}. Tap to change.`}
         >
-          <SunMoon className="w-3.5 h-3.5" aria-hidden="true" />
-          <span>{isUltraContrast ? 'Yellow/Black' : 'Contrast'}</span>
+          {themeDisplay.icon}
+          <span>{themeDisplay.label}</span>
         </button>
       </div>
 

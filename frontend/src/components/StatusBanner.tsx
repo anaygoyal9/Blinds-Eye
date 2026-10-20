@@ -27,7 +27,7 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
             Standby
           </span>
           <span className="text-[11px] sm:text-xs text-[var(--text-secondary)] font-medium">
-            — Press Start Assistance or hit <kbd className="bg-black/60 px-1.5 py-0.5 rounded border border-[var(--border-subtle)] font-mono text-[10px] sm:text-[11px]">Space</kbd>
+            — Press Start Assistance or hit <kbd className="bg-[var(--bg-card-raised)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)] font-mono text-[10px] sm:text-[11px]">Space</kbd>
           </span>
         </div>
       </div>
@@ -49,7 +49,7 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
               SERVER OFFLINE
             </span>
             <span className="text-xs font-bold text-white">
-              Cannot reach ML server. Run: <code className="bg-black px-2 py-0.5 rounded text-yellow-300 font-mono text-xs border border-yellow-400">python server.py</code>
+              Cannot reach ML server. Run: <code className="bg-[var(--bg-card-raised)] px-2 py-0.5 rounded text-[var(--color-warning)] font-mono text-xs border border-yellow-400">python server.py</code>
             </span>
           </div>
         </div>
@@ -63,19 +63,19 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
       <div
         role="alert"
         aria-live="assertive"
-        className="flex items-center gap-3 px-4 py-3 bg-[#3d0000] border-4 border-red-500 rounded-2xl text-white shadow-2xl animate-pulse"
+        className="flex items-center gap-3 px-4 py-3 bg-[var(--color-alert-bg)] border-4 border-[var(--color-alert-border)] rounded-2xl text-[var(--color-alert)] shadow-2xl animate-pulse"
       >
-        <OctagonAlert className="w-8 h-8 text-white flex-shrink-0 stroke-[3]" aria-hidden="true" />
+        <OctagonAlert className="w-8 h-8 text-[var(--color-alert)] flex-shrink-0 stroke-[3]" aria-hidden="true" />
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="bg-red-600 text-white px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
+            <span className="bg-[var(--color-alert)] text-white px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
               CRITICAL STOP
             </span>
-            <h2 className="text-lg md:text-xl font-black text-white">
+            <h2 className="text-lg md:text-xl font-black text-[var(--color-alert)]">
               {activeAlert.title}
             </h2>
           </div>
-          <p className="text-xs md:text-sm text-red-100 font-bold mt-0.5">
+          <p className="text-xs md:text-sm text-[var(--text-primary)] font-bold mt-0.5">
             {activeAlert.detail}
           </p>
         </div>
@@ -89,19 +89,19 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
       <div
         role="alert"
         aria-live="polite"
-        className="flex items-center gap-3 px-4 py-3 bg-[#332200] border-3 border-yellow-400 rounded-2xl text-yellow-100 shadow-lg"
+        className="flex items-center gap-3 px-4 py-3 bg-[var(--color-warning-bg)] border-3 border-[var(--color-warning-border)] rounded-2xl text-[var(--color-warning)] shadow-lg"
       >
-        <AlertTriangle className="w-7 h-7 text-yellow-400 flex-shrink-0 stroke-[3]" aria-hidden="true" />
+        <AlertTriangle className="w-7 h-7 text-[var(--color-warning)] flex-shrink-0 stroke-[3]" aria-hidden="true" />
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="bg-yellow-400 text-black px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
+            <span className="bg-[var(--color-warning)] text-white px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
               CAUTION
             </span>
-            <h2 className="text-base md:text-lg font-black text-yellow-300">
+            <h2 className="text-base md:text-lg font-black text-[var(--color-warning)]">
               {activeAlert.title}
             </h2>
           </div>
-          <p className="text-xs md:text-sm text-white font-bold mt-0.5">
+          <p className="text-xs md:text-sm text-[var(--text-primary)] font-bold mt-0.5">
             {activeAlert.detail}
           </p>
         </div>
@@ -114,19 +114,19 @@ export const StatusBanner: React.FC<StatusBannerProps> = ({
     <div
       role="status"
       aria-live="polite"
-      className="flex items-center gap-3 px-4 py-3 bg-[#002b11] border-3 border-[#00e676] rounded-2xl text-[#00ff66] shadow-md"
+      className="flex items-center gap-3 px-4 py-3 bg-[var(--color-clear-bg)] border-3 border-[var(--color-clear-border)] rounded-2xl text-[var(--color-clear)] shadow-md"
     >
       <ShieldCheck className="w-7 h-7 text-[#00ff66] flex-shrink-0 stroke-[3]" aria-hidden="true" />
       <div className="flex-1">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="bg-[#00e676] text-black px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
+          <span className="bg-[var(--color-clear)] text-white px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
             ALL CLEAR
           </span>
-          <h2 className="text-base md:text-lg font-black text-[#00ff66]">
+          <h2 className="text-base md:text-lg font-black text-[var(--color-clear)]">
             PATH CLEAR
           </h2>
         </div>
-        <p className="text-xs text-emerald-100 font-semibold mt-0.5">
+        <p className="text-xs text-[var(--text-secondary)] font-semibold mt-0.5">
           Walking corridor is unobstructed. Safe to proceed.
         </p>
       </div>

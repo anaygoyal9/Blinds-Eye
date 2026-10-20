@@ -124,7 +124,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   cooldownSeconds: 2.5,
   alertFrequency: 'normal',
   textSize: 'large',
-  contrastTheme: 'standard-dark',
+  contrastTheme: 'bright-day',
   showVideoFeed: true,
   autoStartOnLoad: false,
 };

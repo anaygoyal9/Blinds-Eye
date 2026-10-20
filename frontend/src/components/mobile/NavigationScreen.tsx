@@ -82,7 +82,7 @@ export const NavigationScreen: React.FC<NavigationScreenProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onBack}
-            className="p-2 -ml-2 rounded-xl text-[var(--text-primary)] hover:bg-white/10 cursor-pointer"
+            className="p-2 -ml-2 rounded-xl text-[var(--text-primary)] hover:bg-[var(--bg-card-raised)] cursor-pointer"
             aria-label="Back to Destinations"
           >
             <ArrowLeft className="w-6 h-6" aria-hidden="true" />

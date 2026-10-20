@@ -54,7 +54,7 @@ export const ObstacleDetectionScreen: React.FC<ObstacleDetectionScreenProps> = (
         <div className="flex items-center gap-2">
           <button
             onClick={onBack}
-            className="p-2 -ml-2 rounded-xl text-[var(--text-primary)] hover:bg-white/10 cursor-pointer"
+            className="p-2 -ml-2 rounded-xl text-[var(--text-primary)] hover:bg-[var(--bg-card-raised)] cursor-pointer"
             aria-label="Back to Dashboard"
           >
             <ArrowLeft className="w-6 h-6" aria-hidden="true" />
@@ -76,7 +76,7 @@ export const ObstacleDetectionScreen: React.FC<ObstacleDetectionScreenProps> = (
 
           <button
             onClick={() => setShowStream(!showStream)}
-            className="p-2 rounded-xl text-[var(--text-primary)] hover:bg-white/10 cursor-pointer"
+            className="p-2 rounded-xl text-[var(--text-primary)] hover:bg-[var(--bg-card-raised)] cursor-pointer"
             aria-label={showStream ? 'Hide camera companion feed' : 'Show camera companion feed'}
             title="Camera Stream"
           >
@@ -91,15 +91,15 @@ export const ObstacleDetectionScreen: React.FC<ObstacleDetectionScreenProps> = (
           !isRunning
             ? 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-muted)]'
             : isCritical
-            ? 'bg-[#3d0000] border-red-500 text-white animate-pulse shadow-xl'
+            ? 'bg-[var(--color-alert-bg)] border-[var(--color-alert-border)] text-[var(--color-alert)] animate-pulse shadow-xl'
             : isAlert
-            ? 'bg-[#332200] border-yellow-400 text-yellow-200 shadow-lg'
-            : 'bg-[#002b11] border-[#00e676] text-[#00ff66]'
+            ? 'bg-[var(--color-warning-bg)] border-[var(--color-warning-border)] text-[var(--color-warning)] shadow-lg'
+            : 'bg-[var(--color-clear-bg)] border-[var(--color-clear-border)] text-[var(--color-clear)]'
         }`}
         role="alert"
         aria-live="assertive"
       >
-        <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 bg-black/40 border border-current">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 bg-[var(--bg-card-raised)] border border-current">
           {isAlert ? (
             <AlertTriangle className="w-8 h-8 text-current stroke-[2.5]" aria-hidden="true" />
           ) : (
@@ -131,7 +131,7 @@ export const ObstacleDetectionScreen: React.FC<ObstacleDetectionScreenProps> = (
         <div
           className={`flex flex-col items-center justify-center p-3 rounded-2xl border transition-all text-center min-h-[110px] ${
             activeDirection === 'left' && isAlert
-              ? 'bg-[#332200] border-yellow-400 text-yellow-300 font-black scale-105 shadow-md'
+              ? 'bg-[var(--color-warning-bg)] border-[var(--color-warning-border)] text-[var(--color-warning)] font-black scale-105 shadow-md'
               : 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-muted)]'
           }`}
         >
@@ -147,10 +147,10 @@ export const ObstacleDetectionScreen: React.FC<ObstacleDetectionScreenProps> = (
           className={`flex flex-col items-center justify-center p-3 rounded-2xl border transition-all text-center min-h-[110px] ${
             activeDirection === 'center' && isAlert
               ? isCritical
-                ? 'bg-[#3d0000] border-red-500 text-white font-black scale-105 shadow-xl animate-pulse'
-                : 'bg-[#332200] border-yellow-400 text-yellow-300 font-black scale-105 shadow-md'
+                ? 'bg-[var(--color-alert-bg)] border-[var(--color-alert-border)] text-[var(--color-alert)] font-black scale-105 shadow-xl animate-pulse'
+                : 'bg-[var(--color-warning-bg)] border-[var(--color-warning-border)] text-[var(--color-warning)] font-black scale-105 shadow-md'
               : isRunning
-              ? 'bg-[#002b11] border-[#00e676] text-[#00ff66]'
+              ? 'bg-[var(--color-clear-bg)] border-[var(--color-clear-border)] text-[var(--color-clear)]'
               : 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-muted)]'
           }`}
         >
@@ -165,7 +165,7 @@ export const ObstacleDetectionScreen: React.FC<ObstacleDetectionScreenProps> = (
         <div
           className={`flex flex-col items-center justify-center p-3 rounded-2xl border transition-all text-center min-h-[110px] ${
             activeDirection === 'right' && isAlert
-              ? 'bg-[#332200] border-yellow-400 text-yellow-300 font-black scale-105 shadow-md'
+              ? 'bg-[var(--color-warning-bg)] border-[var(--color-warning-border)] text-[var(--color-warning)] font-black scale-105 shadow-md'
               : 'bg-[var(--bg-card)] border-[var(--border-subtle)] text-[var(--text-muted)]'
           }`}
         >

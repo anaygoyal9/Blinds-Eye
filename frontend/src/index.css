@@ -1,11 +1,44 @@
 @import "tailwindcss";
 
-:root {
+:root, .theme-light {
   --font-primary: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-display: 'Space Grotesk', 'Atkinson Hyperlegible', sans-serif;
 
-  /* Standard High-Contrast Palette (WCAG AAA Dark) */
+  /* Bright Daylight High-Contrast Palette (WCAG AAA Light) */
+  --bg-main: #f4f6fa;          /* Soft daylight slate background */
+  --bg-card: #ffffff;          /* Pure crisp white card surface */
+  --bg-card-hover: #f1f5f9;    /* Clean hover surface */
+  --bg-card-raised: #e8eef5;   /* Distinct raised panels and badges */
+  --border-subtle: #cbd5e1;    /* Accessible crisp border (Slate 300) */
+  --border-strong: #64748b;    /* High contrast border (Slate 500) */
+  
+  --text-primary: #0f172a;     /* Deep slate black (20:1 contrast on white) */
+  --text-secondary: #334155;   /* Clear slate secondary (11:1 contrast) */
+  --text-muted: #64748b;       /* Readable muted text (5.5:1 contrast) */
+
+  --color-clear: #047857;      /* Accessible Vivid Emerald */
+  --color-clear-bg: #ecfdf5;   /* Light emerald tint */
+  --color-clear-border: #10b981;
+
+  --color-alert: #b91c1c;      /* High contrast daylight red */
+  --color-alert-bg: #fef2f2;   /* Light safety red tint */
+  --color-alert-border: #ef4444;
+
+  --color-warning: #b45309;    /* High contrast warning amber */
+  --color-warning-bg: #fffbeb; /* Light warning amber tint */
+  --color-warning-border: #f59e0b;
+
+  --color-focus: #0284c7;      /* Vivid Sky Blue Focus Outline */
+  --color-accent: #0284c7;
+}
+
+/* Standard Dark Mode Palette */
+.theme-dark {
+  --font-primary: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', 'Atkinson Hyperlegible', sans-serif;
+
   --bg-main: #06090e;
   --bg-card: #0e1520;
   --bg-card-hover: #162030;
@@ -33,9 +66,44 @@
   --color-accent: #00e5ff;
 }
 
+/* System Dark Theme Fallback when in System Mode */
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light):not(.theme-ultra-contrast) {
+    --bg-main: #06090e;
+    --bg-card: #0e1520;
+    --bg-card-hover: #162030;
+    --bg-card-raised: #1c2a3d;
+    --border-subtle: #2d4259;
+    --border-strong: #456588;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #d0dbe7;
+    --text-muted: #94a7bc;
+
+    --color-clear: #00e676;
+    --color-clear-bg: #032b17;
+    --color-clear-border: #00c853;
+
+    --color-alert: #ff3838;
+    --color-alert-bg: #330b0b;
+    --color-alert-border: #ff5252;
+
+    --color-warning: #ffd600;
+    --color-warning-bg: #332a00;
+    --color-warning-border: #ffea00;
+
+    --color-focus: #00ffff;
+    --color-accent: #00e5ff;
+  }
+}
+
 /* Scientifically Calibrated Low-Vision Ultra High Contrast Theme (Pure Yellow & True Black) */
 /* Designed for retinitis pigmentosa, macular degeneration, cataracts, and diabetic retinopathy */
 .theme-ultra-contrast {
+  --font-primary: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', 'Atkinson Hyperlegible', sans-serif;
+
   --bg-main: #000000;
   --bg-card: #050505;
   --bg-card-hover: #141414;

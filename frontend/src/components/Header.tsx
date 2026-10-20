@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, Sparkles, SunMoon, Wifi, WifiOff } from 'lucide-react';
+import { Settings, Sparkles, Sun, Moon, Laptop, Zap, Wifi, WifiOff } from 'lucide-react';
 import { AppMode, AppSettings, BackendStatus, ContrastTheme } from '../types/navigation';
 
 interface HeaderProps {
@@ -17,12 +17,44 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSettings,
   onUpdateSettings,
 }) => {
-  const isUltraContrast = settings.contrastTheme === 'ultra-high-contrast';
-
-  const toggleContrast = () => {
-    const nextTheme: ContrastTheme = isUltraContrast ? 'standard-dark' : 'ultra-high-contrast';
+  const cycleTheme = () => {
+    const sequence: ContrastTheme[] = ['bright-day', 'standard-dark', 'system', 'ultra-high-contrast'];
+    const currentIndex = sequence.indexOf(settings.contrastTheme);
+    const nextTheme = sequence[(currentIndex + 1) % sequence.length];
     onUpdateSettings({ contrastTheme: nextTheme });
   };
+
+  const getThemeButtonContent = () => {
+    switch (settings.contrastTheme) {
+      case 'bright-day':
+        return {
+          icon: <Sun className="w-3.5 h-3.5 text-amber-500 fill-amber-500/20 flex-shrink-0" aria-hidden="true" />,
+          label: 'Day Mode',
+          activeClass: 'bg-amber-100 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border-amber-300',
+        };
+      case 'standard-dark':
+        return {
+          icon: <Moon className="w-3.5 h-3.5 text-blue-400 fill-blue-400/20 flex-shrink-0" aria-hidden="true" />,
+          label: 'Dark Mode',
+          activeClass: 'bg-slate-800 text-blue-200 border-blue-500/50',
+        };
+      case 'system':
+        return {
+          icon: <Laptop className="w-3.5 h-3.5 text-[var(--color-focus)] flex-shrink-0" aria-hidden="true" />,
+          label: 'Auto (System)',
+          activeClass: 'bg-[var(--bg-card-raised)] text-[var(--color-focus)] border-[var(--color-focus)]',
+        };
+      case 'ultra-high-contrast':
+      default:
+        return {
+          icon: <Zap className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300 flex-shrink-0" aria-hidden="true" />,
+          label: 'Yellow/Black',
+          activeClass: 'bg-[#ffff00] text-black border-[#ffff00] font-black',
+        };
+    }
+  };
+
+  const themeDisplay = getThemeButtonContent();
 
   const getStatusDisplay = () => {
     if (appMode === 'demo') {
@@ -30,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
         label: 'Demo Mode',
         icon: <Sparkles className="w-3 h-3 text-amber-400" aria-hidden="true" />,
         dotClass: 'bg-amber-400',
-        textClass: 'text-amber-300',
+        textClass: 'text-amber-500 dark:text-amber-300 font-bold',
       };
     }
 
@@ -38,8 +70,8 @@ export const Header: React.FC<HeaderProps> = ({
       return {
         label: 'Online',
         icon: <Wifi className="w-3 h-3 text-emerald-400" aria-hidden="true" />,
-        dotClass: 'bg-emerald-400',
-        textClass: 'text-emerald-300',
+        dotClass: 'bg-emerald-500',
+        textClass: 'text-emerald-700 dark:text-emerald-300 font-bold',
       };
     }
 
@@ -47,27 +79,27 @@ export const Header: React.FC<HeaderProps> = ({
       return {
         label: 'Connecting...',
         icon: <Wifi className="w-3 h-3 text-cyan-400 animate-pulse" aria-hidden="true" />,
-        dotClass: 'bg-cyan-400 animate-pulse',
-        textClass: 'text-cyan-300',
+        dotClass: 'bg-cyan-500 animate-pulse',
+        textClass: 'text-cyan-700 dark:text-cyan-300 font-bold',
       };
     }
 
     return {
       label: 'Offline',
       icon: <WifiOff className="w-3 h-3 text-red-400/80" aria-hidden="true" />,
-      dotClass: 'bg-red-400/80',
-      textClass: 'text-[var(--text-muted)]',
+      dotClass: 'bg-red-500',
+      textClass: 'text-[var(--text-muted)] font-medium',
     };
   };
 
   const status = getStatusDisplay();
 
   return (
-    <header className="w-full bg-[var(--bg-card)] border-b-2 border-[var(--border-subtle)] px-2.5 py-2 sm:px-4 md:px-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3 transition-colors">
+    <header className="w-full bg-[var(--bg-card)] border-b-2 border-[var(--border-subtle)] px-2.5 py-2 sm:px-4 md:px-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3 transition-colors shadow-xs">
       {/* Brand & Connection Badge Row on Mobile */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-          <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[var(--color-focus)] rounded-full flex-shrink-0" aria-hidden="true" />
+          <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[var(--color-focus)] rounded-full flex-shrink-0 shadow-xs" aria-hidden="true" />
           <h1 className="text-sm sm:text-base md:text-lg font-black tracking-tight text-[var(--text-primary)] whitespace-nowrap">
             BLIND'S EYE <span className="hidden sm:inline font-bold text-xs opacity-75 text-[var(--text-muted)]">| Spatial Navigation</span>
           </h1>
@@ -101,8 +133,8 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Normal Font Size"
             className={`min-w-[32px] sm:min-w-[34px] h-8 flex items-center justify-center rounded-md text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               settings.textSize === 'normal'
-                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                ? 'bg-[var(--color-focus)] text-white dark:text-black font-black shadow-xs'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-[var(--bg-card)] hover:text-[var(--text-primary)]'
             }`}
           >
             A-
@@ -113,8 +145,8 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Large Font Size"
             className={`min-w-[32px] sm:min-w-[34px] h-8 flex items-center justify-center rounded-md text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               settings.textSize === 'large'
-                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                ? 'bg-[var(--color-focus)] text-white dark:text-black font-black shadow-xs'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-[var(--bg-card)] hover:text-[var(--text-primary)]'
             }`}
           >
             A
@@ -125,28 +157,27 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Extra Large Font Size"
             className={`min-w-[32px] sm:min-w-[34px] h-8 flex items-center justify-center rounded-md text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               settings.textSize === 'extra-large'
-                ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                ? 'bg-[var(--color-focus)] text-white dark:text-black font-black shadow-xs'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-[var(--bg-card)] hover:text-[var(--text-primary)]'
             }`}
           >
             A+
           </button>
         </div>
 
-        {/* 1-Click High Contrast Toggle (Yellow/Black) */}
+        {/* 1-Click Theme Switcher: Day, Dark, Auto (System), Yellow/Black */}
         <button
-          onClick={toggleContrast}
-          aria-pressed={isUltraContrast}
-          aria-label={isUltraContrast ? 'Switch to Standard Dark' : 'Switch to Ultra Yellow/Black Contrast'}
-          title="Toggle High Contrast (Yellow/Black)"
+          onClick={cycleTheme}
+          aria-label={`Current visual theme: ${themeDisplay.label}. Click to cycle: Day, Dark, Auto, High Contrast.`}
+          title="Toggle Day / Dark / System Auto / Contrast"
           className={`flex items-center justify-center gap-1.5 px-3 h-8 rounded-lg font-bold text-xs border transition-all cursor-pointer ${
-            isUltraContrast
-              ? 'bg-[#ffff00] text-black border-[#ffff00] font-black shadow-sm'
+            settings.contrastTheme === 'ultra-high-contrast'
+              ? 'bg-[#ffff00] text-black border-[#ffff00] font-black shadow-xs'
               : 'bg-[var(--bg-card-raised)] text-[var(--text-primary)] border-[var(--border-subtle)] hover:border-[var(--color-focus)]'
           }`}
         >
-          <SunMoon className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
-          <span className="whitespace-nowrap">{isUltraContrast ? 'Yellow/Black' : 'Contrast'}</span>
+          {themeDisplay.icon}
+          <span className="whitespace-nowrap">{themeDisplay.label}</span>
         </button>
 
         {/* Backend Connection status indicator on sm+ (Non-button label with status dot) */}

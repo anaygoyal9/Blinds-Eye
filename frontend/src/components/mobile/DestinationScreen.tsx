@@ -98,7 +98,7 @@ export const DestinationScreen: React.FC<DestinationScreenProps> = ({
       <header className="flex items-center gap-3 py-2 border-b border-[var(--border-subtle)] mb-5">
         <button
           onClick={onBack}
-          className="p-2 -ml-2 rounded-xl text-[var(--text-primary)] hover:bg-white/10 cursor-pointer"
+          className="p-2 -ml-2 rounded-xl text-[var(--text-primary)] hover:bg-[var(--bg-card-raised)] cursor-pointer"
           aria-label="Back to Dashboard"
         >
           <ArrowLeft className="w-6 h-6" aria-hidden="true" />

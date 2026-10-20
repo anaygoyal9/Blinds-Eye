@@ -66,7 +66,7 @@ export interface ActiveAlert {
 
 /** User configuration and accessibility settings */
 export type TextSize = 'normal' | 'large' | 'extra-large';
-export type ContrastTheme = 'standard-dark' | 'ultra-high-contrast';
+export type ContrastTheme = 'bright-day' | 'standard-dark' | 'ultra-high-contrast' | 'system';
 export type SpeechRate = 'slow' | 'normal' | 'fast';
 export type AlertFrequency = 'low' | 'normal' | 'high';
 

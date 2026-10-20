@@ -57,7 +57,7 @@ export const Controls: React.FC<ControlsProps> = ({
             className={`h-8 px-2.5 sm:px-3 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
               appMode === 'assistance'
                 ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-[var(--bg-card-raised)] hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={appMode === 'assistance'}
           >
@@ -70,7 +70,7 @@ export const Controls: React.FC<ControlsProps> = ({
             className={`h-8 px-2.5 sm:px-3 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
               appMode === 'demo'
                 ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-[var(--bg-card-raised)] hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={appMode === 'demo'}
           >
@@ -83,7 +83,7 @@ export const Controls: React.FC<ControlsProps> = ({
             className={`h-8 px-2.5 sm:px-3 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
               appMode === 'test'
                 ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                : 'bg-transparent text-[var(--text-secondary)] hover:bg-[var(--bg-card-raised)] hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={appMode === 'test'}
           >
@@ -103,7 +103,7 @@ export const Controls: React.FC<ControlsProps> = ({
             className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors cursor-pointer ${
               settings.voiceEnabled
                 ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-muted)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                : 'bg-transparent text-[var(--text-muted)] hover:bg-[var(--bg-card-raised)] hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={settings.voiceEnabled}
             title="Toggle Voice Announcements (Shortcut: V)"
@@ -124,7 +124,7 @@ export const Controls: React.FC<ControlsProps> = ({
             className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors cursor-pointer ${
               settings.spatialAudioEnabled
                 ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-muted)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                : 'bg-transparent text-[var(--text-muted)] hover:bg-[var(--bg-card-raised)] hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={settings.spatialAudioEnabled}
             title="Toggle Spatial Audio Panning"
@@ -139,7 +139,7 @@ export const Controls: React.FC<ControlsProps> = ({
             className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors cursor-pointer ${
               settings.hapticEnabled
                 ? 'bg-[var(--color-focus)] text-black font-black shadow-sm'
-                : 'bg-transparent text-[var(--text-muted)] hover:bg-white/10 hover:text-[var(--text-primary)]'
+                : 'bg-transparent text-[var(--text-muted)] hover:bg-[var(--bg-card-raised)] hover:text-[var(--text-primary)]'
             }`}
             aria-pressed={settings.hapticEnabled}
             title="Toggle Haptic Feedback (Shortcut: H)"
